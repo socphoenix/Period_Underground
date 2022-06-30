@@ -14,3 +14,6 @@ Make sure to install cmake using this tool. From here you can either set up qt c
 For instance on Windows you can do the following:
 using CMake use the following command on windows to compile using the QT open-source tools (example is for QT 6.3.1):
 "cmake -DCMAKE_PREFIX_PATH=C:\Qt\6.3.1\msvc2019_64 -S <source-dir> -B <build-dir>"
+
+To install on Android:
+In order to install these you will need to allow unknown apps, see [here for more info.](https://android.gadgethacks.com/how-to/android-101-sideload-apps-by-enabling-unknown-sources-install-unknown-apps-0161947/)
