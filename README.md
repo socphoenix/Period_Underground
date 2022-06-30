@@ -9,7 +9,7 @@ The app uses shades of red to show bleeding, grey for spotting, and green for th
 
 Building Instructions.
 You will need the QT online installer, which can be found here: https://www.qt.io/download-qt-installer
-Make sure to install cmake using this tool. From here you can either set up qt creator to build for your architecture (recommended) or you can use command line tools installed with the package to build the program.
+Make sure to install cmake using this tool. From here you can either set up qt creator to build for your architecture (recommended) or you can use command line tools installed with the package to build the program. If using QT Creator, select Open Project and navigate to the folder containing the source code. Select all files, and click Open. QT Creator will ask to adjust CMake to match your current configurations. Press ok and follow the guide. This will allow you to select run or build to create the executable file for your current computer/device.
 
 For instance on Windows you can do the following:
 using CMake use the following command on windows to compile using the QT open-source tools (example is for QT 6.3.1):
