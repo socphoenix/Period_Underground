@@ -154,7 +154,7 @@ void MainWindow::on_comboBox_3_currentIndexChanged(int index)
     QDate nextPeriod;
     currentDate = ui->calendarWidget->selectedDate();
     lastPeriod = f.lastPeriodCheck();
-    if(lastPeriod < currentDate.addDays(-3)) {
+    if(lastPeriod < currentDate.addDays(-3) && flow != 0) {
         //add new period info
         f.newPeriodDate(currentDate);
         nextPeriod = f.whenIsPeriod(currentDate);
