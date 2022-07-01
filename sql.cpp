@@ -148,9 +148,7 @@ void sql::deleteALL(){
     query.prepare("DELETE FROM Last_Period");
     query.exec();
     //vacuum database to ensure no data is left behind
-    query.prepare("VACUUM Period_Info");
-    query.exec();
-    query.prepare("VACUUM Last_Period");
+    query.prepare("VACUUM");
     query.exec();
 }
 //find and return last period start date
