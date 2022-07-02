@@ -101,13 +101,26 @@ void MainWindow::on_calendarWidget_selectionChanged()
 
 void MainWindow::on_pushButton_clicked()
 {
-    //kill all humans
-    f.deleteALL();
-    QMessageBox::information(
-        this,
-        tr("Application Name"),
-        tr("All Data Successfully Deleted. The Program will now close.") );
-    QCoreApplication::quit();
+    QMessageBox confirm;
+    confirm.setText("Are you sure you wish to delete all data?");
+    confirm.setInformativeText("This cannot be undone");
+    confirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    confirm.setDefaultButton(QMessageBox::Cancel);
+    int ret = confirm.exec();
+    switch (ret) {
+    case QMessageBox::Cancel:
+        break;
+    case QMessageBox::Ok:
+        //kill all humans
+        f.deleteALL();
+        QMessageBox::information(
+            this,
+            tr("Application Name"),
+            tr("All Data Successfully Deleted. The Program will now close.") );
+        QCoreApplication::quit();
+        break;
+    }
+
 }
 
 
