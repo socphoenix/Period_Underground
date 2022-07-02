@@ -26,8 +26,8 @@ MainWindow::MainWindow(QWidget *parent)
     if(test != test1) {
         QDate nextPeriod = f.whenIsPeriod(test);
         int i = 0;
-        ui->label_5->setText(nextPeriod.toString("MM/dd/yy"));
-        ui->label_7->setText(test.toString("MM/dd/yy"));
+        ui->label_5->setText(nextPeriod.toString(DateFormats));
+        ui->label_7->setText(test.toString(DateFormats));
         while(i < 7){
             QTextCharFormat format;
             format.setBackground(QColor("green"));
@@ -36,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent)
             i++;
         }
 
+    }
+    if(DateFormats == "dd/MM/yyyy") {
+        ui->comboBox_5->setCurrentIndex(1);
     }
 
 }
@@ -360,5 +363,29 @@ void MainWindow::on_checkBox_3_stateChanged(int arg1)
     sex = ui->comboBox_4->currentIndex();
     spotting = ui->comboBox->currentIndex();
     f.saveData(cur_Date, flow, mood, sex, spotting, crampsCheck, tenderCheck, headacheCheck);
+}
+
+
+void MainWindow::on_comboBox_5_currentIndexChanged(int index)
+{
+    //label_5 next period, label_7 last period
+    if(index == 0) {
+        QDate date;
+        date = f.lastPeriodCheck();
+        ui->label_7->setText(date.toString("MM/dd/yy"));
+        date = f.whenIsPeriod(date);
+        ui->label_5->setText(date.toString("MM/dd/yy"));
+        QString format = "MM/dd/yy";
+        f.saveSettings(format);
+    }
+    else if(index == 1) {
+        QDate date;
+        date = f.lastPeriodCheck();
+        ui->label_7->setText(date.toString("dd/MM/yyyy"));
+        date = f.whenIsPeriod(date);
+        ui->label_5->setText(date.toString("dd/MM/yyyy"));
+        QString format = "dd/MM/yyyy";
+        f.saveSettings(format);
+    }
 }
 

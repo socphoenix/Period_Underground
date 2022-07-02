@@ -12,6 +12,7 @@
 #include <QDate>
 
 int spotting, flow, mood, sex, cramps, tender, headache;
+QString DateFormats = "MM/dd/yy";
 QDate cur_Date;
 
 QSqlDatabase db;
@@ -37,6 +38,10 @@ void sql::Startup() {
         if(db.open())
         {
             QSqlQuery query(db);
+            //add settings table for existing databases
+            query.prepare("CREATE TABLE IF NOT EXISTS Settings (ID int not null primary key, DateFormat text)");
+            query.exec();
+            //load data
             query.prepare("SELECT * FROM Period_Info");
             query.exec();
             while(query.next()) {
@@ -53,8 +58,17 @@ void sql::Startup() {
                 changer();
 
         }
-            //calculate next period and update
-            //need to get period start data in Last_Period table somehow
+            //load settings
+            query.prepare("SELECT * FROM Settings WHERE ID = (:ID)");
+            query.bindValue(0, 1);
+            query.exec();
+            query.next();
+            if(query.value(1).toString() != "") {
+                DateFormats = query.value(1).toString();
+            }
+
+            else{//leave at default
+            }
 
             qDebug() << "DATABASE OPEN";
             }
@@ -71,6 +85,8 @@ void sql::Startup() {
         query.prepare("CREATE TABLE IF NOT EXISTS Period_Info (QDate text not null primary key, flow int, mood int, sex int, spotting int, cramps int, tender int, headache int);");
         query.exec();
         query.prepare("CREATE TABLE IF NOT EXISTS Last_Period (QDate text not null primary key);");
+        query.exec();
+        query.prepare("CREATE TABLE IF NOT EXISTS Settings (ID int not null primary key, DateFormat text");
         query.exec();
 
         //error checking
@@ -147,6 +163,8 @@ void sql::deleteALL(){
     query.exec();
     query.prepare("DELETE FROM Last_Period");
     query.exec();
+    query.prepare("DELETE FROM Settings");
+    query.exec();
     //vacuum database to ensure no data is left behind
     query.prepare("VACUUM");
     query.exec();
@@ -207,4 +225,27 @@ QDate sql::whenIsPeriod(QDate date2) {
     }
     qDebug() << date2;
     return(date2);
+}
+
+void sql::saveSettings(QString dateFormat) {
+    QSqlQuery query(db);
+    //check for already existing rows
+    query.prepare("SELECT * FROM Settings");
+    query.exec();
+    query.next();
+    //if data doesn't exist add new data (this includes all check boxes under the calendar)
+    if(query.value(0).toString() == ""){
+        query.prepare("INSERT INTO Settings (ID, DateFormat) VALUES (:ID, :Date)");
+        query.bindValue(0, 1);
+        query.bindValue(1, dateFormat);
+        query.exec();
+    }
+    //update changes to already existing information on current date
+    else {
+        query.prepare("UPDATE Settings SET DateFormat=:Date WHERE ID=:ID");
+        query.bindValue(":Date", dateFormat);
+        query.bindValue(":ID", 1);
+        query.exec();
+    }
+
 }

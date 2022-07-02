@@ -51,6 +51,8 @@ private slots:
 
     void on_checkBox_3_stateChanged(int arg1);
 
+    void on_comboBox_5_currentIndexChanged(int index);
+
 public slots:
     void updateUI();
     //need to create a signal/slot to update UI from reading of sql

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 7.0.2, 2022-07-01T18:47:56. -->
+<!-- Written by QtCreator 7.0.2, 2022-07-02T10:34:00. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -1163,7 +1163,7 @@
      <value type="QString" key="identifier">7245CF14-E60C-4108-B25A-D0CBE34CBE0B</value>
      <value type="int" key="type">1</value>
     </valuemap>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Run  on iOS Simulator</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Run Period_Underground on iOS Simulator</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.IosRunConfiguration:Period_Underground</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">Period_Underground</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>

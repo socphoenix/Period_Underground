@@ -9,6 +9,7 @@
 
 extern int spotting, flow, mood, sex, cramps, tender, headache;
 extern QDate cur_Date;
+extern QString DateFormats;
 
 class sql : public QObject
 {
@@ -25,6 +26,7 @@ public slots:
     QDate lastPeriodCheck();
     void newPeriodDate(QDate date1);
     QDate whenIsPeriod(QDate date2);
+    void saveSettings(QString dateFormat);
 
 signals:
     void load();
