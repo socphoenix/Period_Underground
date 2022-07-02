@@ -7,13 +7,19 @@
 #include <QWidget>
 #include <QObject>
 #include <QMessageBox>
+#include <QColor>
 sql f;
+QTextCharFormat currentDateColor;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     connect(&f, SIGNAL(load()), this, SLOT(updateUI()));
+    //set default color in case spotting is unselected to No
+    QColor testing;
+    testing = ui->comboBox->palette().base().color();
+    currentDateColor.setBackground(QColor(testing));
     f.Startup();
     QDate test = f.lastPeriodCheck();
     QDate test1;
@@ -128,12 +134,16 @@ void MainWindow::on_comboBox_3_currentIndexChanged(int index)
         ui->calendarWidget->setDateTextFormat(sql_me, format);
         //ui->comboBox->setCurrentIndex(1);
     }
-    else {
+    else if(ui->comboBox->currentIndex() == 1) {
         QTextCharFormat format;
         format.setBackground(QColor("grey"));
         QDate sql_me = ui->calendarWidget->selectedDate();
         ui->calendarWidget->setDateTextFormat(sql_me, format);
-        //ui->comboBox->setCurrentIndex(0);
+
+    }
+    else {
+        QDate sql_me = ui->calendarWidget->selectedDate();
+        ui->calendarWidget->setDateTextFormat(sql_me, currentDateColor);
     }
     QString curDate;
     QDate cur_Date = ui->calendarWidget->selectedDate();
@@ -280,6 +290,10 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
         QTextCharFormat format;
         format.setBackground(QColor("grey"));
         ui->calendarWidget->setDateTextFormat(cur_Date, format);
+    }
+    else {
+        QDate sql_me = ui->calendarWidget->selectedDate();
+        ui->calendarWidget->setDateTextFormat(sql_me, currentDateColor);
     }
 
 }
