@@ -1,4 +1,5 @@
-/*This program is Licensed under the GNU GPL V3 */
+/*This program is Licensed under the GNU GPL V3. This program uses the Qt Sql library, which is
+licensed under the GNU LGPL V3 https://www.gnu.org/licenses/lgpl-3.0.html*/
 #include "sql.h"
 #include "mainwindow.h"
 #include <QString>
