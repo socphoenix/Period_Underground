@@ -15,8 +15,7 @@ This program uses sqlite, which as noted in the release packages does not suppor
 Library license info:
 This has been put in front of building instructions due to the number of developers whose open source contributions helped make this app possible.
 
-<b><u>Qt libraries except the QSql library</u></b> are being used under GPL V3 in order to keep one license accross as much of the program as possible. 
-<b><u>The Qt sql library</u></b> is under the GNU Lesser Public License v3 https://www.gnu.org/licenses/lgpl-3.0.html .  The Qt source code for all of these libraries can be downloaded from https://download.qt.io/official_releases/qt/6.3/6.3.1/single/ . Alternatively you can contact me here on github or at tuc03516@gmail.com for a copy of the source code.
+<b><u>Qt libraries used are Core, GUI, and SQL</u></b> which are licensed under the GNU Lesser Public License v3 https://www.gnu.org/licenses/lgpl-3.0.html .  The Qt source code for all of these libraries can be downloaded from https://download.qt.io/official_releases/qt/6.3/6.3.1/single/ . Alternatively you can contact me here on github or at tuc03516@gmail.com for a copy of the source code.
 
 <b><u>SQlite</u></b> is licensed under the public domain. It's source code can be found at https://sqlite.org/src/doc/trunk/README.md .
 
@@ -27,6 +26,7 @@ This has been put in front of building instructions due to the number of develop
 <b><u>SQLite3 Multiple Ciphers is used by QtCipherSqlitePlugin</u></b> and is released under the MIT license. Source code for this project can be found at https://utelle.github.io/SQLite3MultipleCiphers/
   
 Building Instructions.
+TODO
 You will need the QT online installer, which can be found here: https://www.qt.io/download-qt-installer
 Make sure to install cmake using this tool. From here you can either set up qt creator to build for your architecture (recommended) or you can use command line tools installed with the package to build the program. If using QT Creator, select Open Project and navigate to the folder containing the source code. Select all files, and click Open. QT Creator will ask to adjust CMake to match your current configurations. Press ok and follow the guide. This will allow you to select run or build to create the executable file for your current computer/device.
 
