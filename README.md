@@ -22,4 +22,4 @@ To install on Android:
 In order to install these you will need to allow unknown apps, see [here for more info.](https://android.gadgethacks.com/how-to/android-101-sideload-apps-by-enabling-unknown-sources-install-unknown-apps-0161947/)
 
 Library license info:
-Qt libraries including the QSql library are being used under GPL V3 in order to keep one license accross the entire program. The Qt source code for these libraries can be downloaded from https://download.qt.io/official_releases/qt/6.3/6.3.1/single/ . Alternatively you can contact me here on github or at tuc03516@gmail.com for a copy of the source code.
+Qt libraries except the QSql library are being used under GPL V3 in order to keep one license accross the entire program. The Qt sql library is under the GNU Lesser Public License v3 https://www.gnu.org/licenses/lgpl-3.0.html .  The Qt source code for these libraries can be downloaded from https://download.qt.io/official_releases/qt/6.3/6.3.1/single/ . Alternatively you can contact me here on github or at tuc03516@gmail.com for a copy of the source code.
