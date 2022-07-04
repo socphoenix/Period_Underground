@@ -11,6 +11,8 @@
 #include <QObject>
 #include <QMessageBox>
 #include <QColor>
+#include <QInputDialog>
+
 sql f;
 QTextCharFormat currentDateColor;
 MainWindow::MainWindow(QWidget *parent)
@@ -19,11 +21,25 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     connect(&f, SIGNAL(load()), this, SLOT(updateUI()));
+    ui->lineEdit->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_2->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_3->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_4->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_5->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_6->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_7->setEchoMode(QLineEdit::Password);
     //set default color in case spotting is unselected to No
     QColor testing;
     testing = ui->comboBox->palette().base().color();
     currentDateColor.setBackground(QColor(testing));
     f.Startup();
+    if(passwordProtected == true){
+        //check if database is password protected, ask for password if needed
+        QInputDialog enterPassword;
+        password = enterPassword.getText(0, "Enter Password", "or hit cancel for none", QLineEdit::Password);
+        f.Startup();
+    }
+
     QDate test = f.lastPeriodCheck();
     QDate test1;
     if(test != test1) {
@@ -389,6 +405,63 @@ void MainWindow::on_comboBox_5_currentIndexChanged(int index)
         ui->label_5->setText(date.toString("dd/MM/yyyy"));
         QString format = "dd/MM/yyyy";
         f.saveSettings(format);
+    }
+}
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    if(ui->lineEdit->text() == ui->lineEdit_2->text()) {
+        QMessageBox confirm;
+        confirm.setText("Are you sure you want to password protect this app?");
+        confirm.setInformativeText("This cannot be undone");
+        confirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+        confirm.setDefaultButton(QMessageBox::Cancel);
+        int ret = confirm.exec();
+        switch (ret) {
+        case QMessageBox::Cancel:
+            break;
+        case QMessageBox::Ok:
+            QString newPassword = ui->lineEdit->text();
+            f.createPassword(newPassword);
+            QMessageBox::information(
+                this,
+                tr("Application Name"),
+                tr("New Password saved.") );
+            break;
+        }
+    }
+}
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    QString newPassword = ui->lineEdit_5->text();
+    if(password == ui->lineEdit_3->text() && newPassword == ui->lineEdit_4->text()) {
+        f.updatePassword(newPassword);
+        QMessageBox::information(
+            this,
+            tr("Application Name"),
+            tr("Password Updated.") );
+
+    }
+}
+
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    if(ui->lineEdit_6->text() == password && ui->lineEdit_7->text() == password) {
+        f.removePassword();
+        QMessageBox::information(
+            this,
+            tr("Application Name"),
+            tr("Password Removed.") );
+    }
+    else {
+        QMessageBox::information(
+            this,
+            tr("Application Name"),
+            tr("Wrong Password Try Again.") );
     }
 }
 

@@ -56,6 +56,12 @@ private slots:
 
     void on_comboBox_5_currentIndexChanged(int index);
 
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_4_clicked();
+
 public slots:
     void updateUI();
     //need to create a signal/slot to update UI from reading of sql
