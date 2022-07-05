@@ -18,6 +18,7 @@ QString DateFormats = "MM/dd/yy";
 QDate cur_Date;
 QString password = "";
 bool passwordProtected = false;
+bool startup = true;
 
 QSqlDatabase db;
 //emits signal to update user interface on app startup
@@ -26,6 +27,7 @@ void sql::changer() {
 }
 
 void sql::Startup() {
+    startup = true;
     QString dbName = "period_underground.sqlite";
     QString dbLocation = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
     //set database to store in users "Documents folder". On Mobile this will stay with the programs sandbox
@@ -111,9 +113,16 @@ void sql::Startup() {
         if(!db.isOpen()) {
         }
 }
+    startup = false;
+    db.close();
+    qDebug() << startup;
 }
 //save user input
 void sql::saveData(QString date, int flow, int mood, int sex, int spotting, int crampsCheck, int tenderCheck, int headacheCheck) {
+    //check if db is open
+    if(db.isOpen() == false) {
+        db.open();
+    }
 
     QSqlQuery query(db);
     //check for already existing rows
@@ -147,10 +156,15 @@ void sql::saveData(QString date, int flow, int mood, int sex, int spotting, int 
         query.bindValue(":QDate", date);
         query.exec();
     }
+    if(startup == true) {}
+    else {db.close();}
 
 }
 //load data pertaining to clicked date on calendar
 void sql::loadData(QString curDate) {
+    if(db.isOpen() == false) {
+        db.open();
+    }
     QSqlQuery query(db);
     query.prepare("SELECT * FROM Period_Info WHERE QDate = (:QDate)");
     query.bindValue(":QDate", curDate);
@@ -165,9 +179,15 @@ void sql::loadData(QString curDate) {
     tender = query.value(6).toInt();
     headache = query.value(7).toInt();
 
+    if(startup == true) {}
+    else {db.close();}
+
 }
 //leave sql database file intact, but delete all user data from database
 void sql::deleteALL(){
+    if(db.isOpen() == false) {
+        db.open();
+    }
     QSqlQuery query(db);
     //delete all rows
     query.prepare("DELETE FROM Period_Info");
@@ -179,28 +199,42 @@ void sql::deleteALL(){
     //vacuum database to ensure no data is left behind
     query.prepare("VACUUM");
     query.exec();
+    db.close();
 }
 //find and return last period start date
 QDate sql::lastPeriodCheck(){
+    if(db.isOpen() == false) {
+        db.open();
+    }
     QSqlQuery query(db);
     query.prepare("SELECT QDate FROM Last_Period");
     query.exec();
     query.last();
     QString transitory = query.value(0).toString();
     QDate lastDate = lastDate.fromString(transitory);
+    if(startup == true) {}
+    else {db.close();}
     return lastDate;
 }
 //add start of new period for period estimator
 void sql::newPeriodDate(QDate date1) {
+    if(db.isOpen() == false) {
+        db.open();
+    }
     QString dateSave = date1.toString();
     QSqlQuery query(db);
     query.prepare("INSERT INTO Last_Period (QDate) VALUES (:QDate)");
     query.bindValue(":QDate", dateSave);
     query.exec();
+    if(startup == true) {}
+    else {db.close();}
 }
 
 //estimate next period
 QDate sql::whenIsPeriod(QDate date2) {
+    if(db.isOpen() == false) {
+        db.open();
+    }
     QSqlQuery query(db);
     query.prepare("SELECT QDate FROM Last_Period");
     query.exec();
@@ -234,11 +268,16 @@ QDate sql::whenIsPeriod(QDate date2) {
     else {
         date2 = date2.addDays(28);
     }
+    if(startup == true) {}
+    else {db.close();}
 
     return(date2);
 }
 
 void sql::saveSettings(QString dateFormat) {
+    if(db.isOpen() == false) {
+        db.open();
+    }
     QSqlQuery query(db);
     //check for already existing rows
     query.prepare("SELECT * FROM Settings");
@@ -258,27 +297,36 @@ void sql::saveSettings(QString dateFormat) {
         query.bindValue(":ID", 1);
         query.exec();
     }
+    if(startup == true) {}
+    else {db.close();}
 
 }
 
 void sql::createPassword(QString newPassword) {
-    db.close();
     db.setPassword(newPassword);
     db.setConnectOptions("QSQLITE_BUSY_TIMEOUT=5000;QSQLITE_CREATE_KEY");
     db.open();
+    db.close();
+    password = newPassword;
+    db.setPassword(password);
 }
 
 void sql::updatePassword(QString newPassword) {
-    db.close();
     db.setPassword(password);
+    qDebug() << db.isOpen();
     QString command = "QSQLITE_UPDATE_KEY=" + newPassword;
     db.setConnectOptions(command);
     db.open();
+    db.close();
+    password = newPassword;
+    db.setPassword(password);
 }
 
 void sql::removePassword() {
-    db.close();
     db.setPassword(password);
     db.setConnectOptions("QSQLITE_REMOVE_KEY");
     db.open();
+    db.close();
+    password = "";
+    db.setPassword(password);
 }

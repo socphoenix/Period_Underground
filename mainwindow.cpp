@@ -220,55 +220,6 @@ void MainWindow::on_comboBox_3_currentIndexChanged(int index)
 }
 
 
-void MainWindow::on_calendarWidget_activated(const QDate &date)
-{
-    QInputMethod* input = QGuiApplication::inputMethod();
-    input->setVisible(false);
-}
-
-
-void MainWindow::on_textEdit_selectionChanged()
-{
-    QInputMethod* input = QGuiApplication::inputMethod();
-    input->setVisible(false);
-}
-
-
-void MainWindow::on_textEdit_copyAvailable(bool b)
-{
-    QInputMethod* input = QGuiApplication::inputMethod();
-    input->setVisible(false);
-}
-
-
-void MainWindow::on_textEdit_cursorPositionChanged()
-{
-    QInputMethod* input = QGuiApplication::inputMethod();
-    input->setVisible(false);
-}
-
-
-void MainWindow::on_textEdit_redoAvailable(bool b)
-{
-    QInputMethod* input = QGuiApplication::inputMethod();
-    input->setVisible(false);
-}
-
-
-void MainWindow::on_textEdit_textChanged()
-{
-    QInputMethod* input = QGuiApplication::inputMethod();
-    input->setVisible(false);
-}
-
-
-void MainWindow::on_textEdit_undoAvailable(bool b)
-{
-    QInputMethod* input = QGuiApplication::inputMethod();
-    input->setVisible(false);
-}
-
-
 void MainWindow::on_comboBox_2_currentIndexChanged(int index)
 {
     QString curDate;
