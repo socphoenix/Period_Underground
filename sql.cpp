@@ -339,8 +339,9 @@ bool sql::wasBleeding(QDate curDate) {
     }
     QSqlQuery query(db);
     while(i > 0) {
+        QString cur_Date = curDate.toString();
         query.prepare("SELECT * FROM Period_Info WHERE QDate = (:QDate)");
-        query.bindValue(":QDate", curDate);
+        query.bindValue(":QDate", cur_Date);
         query.exec();
         query.next();
         int flow = query.value(1).toInt();
@@ -350,6 +351,7 @@ bool sql::wasBleeding(QDate curDate) {
         curDate = curDate.addDays(-1);
         i = i-1;
     }
-    db.close();
+    if(startup == true) {}
+    else {db.close();}
     return blood;
 }

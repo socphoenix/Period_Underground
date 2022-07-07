@@ -14,6 +14,8 @@
 #include <QInputDialog>
 
 sql f;
+QColor testing;
+
 QTextCharFormat currentDateColor;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -29,7 +31,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->lineEdit_6->setEchoMode(QLineEdit::Password);
     ui->lineEdit_7->setEchoMode(QLineEdit::Password);
     //set default color in case spotting is unselected to No
-    QColor testing;
     testing = ui->comboBox->palette().base().color();
     currentDateColor.setBackground(QColor(testing));
     f.Startup();
@@ -198,11 +199,10 @@ void MainWindow::on_comboBox_3_currentIndexChanged(int index)
     QDate currentDate;
     QDate nextPeriod;
     currentDate = ui->calendarWidget->selectedDate();
-    //lastPeriod = f.lastPeriodCheck();
+    lastPeriod = f.lastPeriodCheck();
     bool blood = false;
-    blood = f.wasBleeding(currentDate);
-    //if(lastPeriod < currentDate.addDays(-3) && flow != 0) {
-    if(blood == false) {
+    blood = f.wasBleeding(currentDate.addDays(-1));
+    if(lastPeriod < currentDate.addDays(-7) && blood == false && flow > 0) {
         //add new period info
         f.newPeriodDate(currentDate);
         nextPeriod = f.whenIsPeriod(currentDate);
@@ -216,8 +216,33 @@ void MainWindow::on_comboBox_3_currentIndexChanged(int index)
             nextPeriod = nextPeriod.addDays(1);
             i++;
         }
+        i = 0;
+        if(lastPeriod.isValid() == true && lastPeriod < currentDate) {
+            nextPeriod = f.whenIsPeriod(lastPeriod);
+            while(i < 7) {
+                QTextCharFormat format;
+                format.setBackground(QColor(testing));
+                ui->calendarWidget->setDateTextFormat(nextPeriod, format);
+                nextPeriod = nextPeriod.addDays(1);
+                i++;
+            }
+        }
     }
-    else {/*no action needed*/}
+    else if(lastPeriod.isValid() == false) {
+        f.newPeriodDate(currentDate);
+        nextPeriod = f.whenIsPeriod(currentDate);
+        ui->label_7->setText(currentDate.toString("MM/dd/yy"));
+        ui->label_5->setText(nextPeriod.toString("MM/dd/yy"));
+        int i = 0;
+        while(i < 7){
+            QTextCharFormat format;
+            format.setBackground(QColor("green"));
+            ui->calendarWidget->setDateTextFormat(nextPeriod, format);
+            nextPeriod = nextPeriod.addDays(1);
+            i++;
+        }
+    }
+    blood = false;
 
 
 }
