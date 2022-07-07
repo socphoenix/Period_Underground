@@ -9,7 +9,8 @@ The app uses shades of red to show bleeding, grey for spotting, and green for th
 
 ![image](https://user-images.githubusercontent.com/18272432/176724435-c08d61c0-8dc4-462e-96a7-03bd83dcb3e4.png)
 ![image](https://user-images.githubusercontent.com/18272432/176724619-78065ebf-b2cd-4983-9cec-b4918c65e777.png)
-![image](https://user-images.githubusercontent.com/18272432/176724699-6e4a29c7-22a9-4069-bc76-756249c67ee4.png)
+![Screen Shot 2022-07-07 at 12 09 13 PM](https://user-images.githubusercontent.com/18272432/177840774-0353bc60-951d-436d-9a4f-2d7aa422108b.png)
+
 
 Notes on Database usage/encryption:
 This branch of the repository is source code modified to be able to use encryption, primarily to use for the Google Play Store. You will need to complile the encryption modules from source.
