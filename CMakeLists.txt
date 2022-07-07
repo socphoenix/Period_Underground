@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(Period_Underground VERSION 1.0.1 LANGUAGES CXX)
+project(Period_Underground VERSION 1.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -38,6 +38,7 @@ else()
         add_library(Period_Underground SHARED
             ${PROJECT_SOURCES}
         )
+
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
@@ -55,6 +56,9 @@ set_target_properties(Period_Underground PROPERTIES
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
+    QT_ANDROID_VERSION_NAME 1.0.2
+    QT_ANDROID_VERSION_CODE 2
+
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)

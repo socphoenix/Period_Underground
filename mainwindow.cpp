@@ -11,7 +11,11 @@
 #include <QObject>
 #include <QMessageBox>
 #include <QColor>
+#include <QInputDialog>
+
 sql f;
+QColor testing;
+
 QTextCharFormat currentDateColor;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,11 +23,24 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     connect(&f, SIGNAL(load()), this, SLOT(updateUI()));
+    ui->lineEdit->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_2->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_3->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_4->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_5->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_6->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_7->setEchoMode(QLineEdit::Password);
     //set default color in case spotting is unselected to No
-    QColor testing;
     testing = ui->comboBox->palette().base().color();
     currentDateColor.setBackground(QColor(testing));
     f.Startup();
+    if(passwordProtected == true){
+        //check if database is password protected, ask for password if needed
+        QInputDialog enterPassword;
+        password = enterPassword.getText(0, "Enter Password", "or hit cancel for none", QLineEdit::Password);
+        f.Startup();
+    }
+
     QDate test = f.lastPeriodCheck();
     QDate test1;
     if(test != test1) {
@@ -183,7 +200,9 @@ void MainWindow::on_comboBox_3_currentIndexChanged(int index)
     QDate nextPeriod;
     currentDate = ui->calendarWidget->selectedDate();
     lastPeriod = f.lastPeriodCheck();
-    if(lastPeriod < currentDate.addDays(-3) && flow != 0) {
+    bool blood = false;
+    blood = f.wasBleeding(currentDate.addDays(-1));
+    if(lastPeriod < currentDate.addDays(-7) && blood == false && flow > 0) {
         //add new period info
         f.newPeriodDate(currentDate);
         nextPeriod = f.whenIsPeriod(currentDate);
@@ -197,59 +216,35 @@ void MainWindow::on_comboBox_3_currentIndexChanged(int index)
             nextPeriod = nextPeriod.addDays(1);
             i++;
         }
+        i = 0;
+        if(lastPeriod.isValid() == true && lastPeriod < currentDate) {
+            nextPeriod = f.whenIsPeriod(lastPeriod);
+            while(i < 7) {
+                QTextCharFormat format;
+                format.setBackground(QColor(testing));
+                ui->calendarWidget->setDateTextFormat(nextPeriod, format);
+                nextPeriod = nextPeriod.addDays(1);
+                i++;
+            }
+        }
     }
-    else {/*no action needed*/}
+    else if(lastPeriod.isValid() == false) {
+        f.newPeriodDate(currentDate);
+        nextPeriod = f.whenIsPeriod(currentDate);
+        ui->label_7->setText(currentDate.toString("MM/dd/yy"));
+        ui->label_5->setText(nextPeriod.toString("MM/dd/yy"));
+        int i = 0;
+        while(i < 7){
+            QTextCharFormat format;
+            format.setBackground(QColor("green"));
+            ui->calendarWidget->setDateTextFormat(nextPeriod, format);
+            nextPeriod = nextPeriod.addDays(1);
+            i++;
+        }
+    }
+    blood = false;
 
 
-}
-
-
-void MainWindow::on_calendarWidget_activated(const QDate &date)
-{
-    QInputMethod* input = QGuiApplication::inputMethod();
-    input->setVisible(false);
-}
-
-
-void MainWindow::on_textEdit_selectionChanged()
-{
-    QInputMethod* input = QGuiApplication::inputMethod();
-    input->setVisible(false);
-}
-
-
-void MainWindow::on_textEdit_copyAvailable(bool b)
-{
-    QInputMethod* input = QGuiApplication::inputMethod();
-    input->setVisible(false);
-}
-
-
-void MainWindow::on_textEdit_cursorPositionChanged()
-{
-    QInputMethod* input = QGuiApplication::inputMethod();
-    input->setVisible(false);
-}
-
-
-void MainWindow::on_textEdit_redoAvailable(bool b)
-{
-    QInputMethod* input = QGuiApplication::inputMethod();
-    input->setVisible(false);
-}
-
-
-void MainWindow::on_textEdit_textChanged()
-{
-    QInputMethod* input = QGuiApplication::inputMethod();
-    input->setVisible(false);
-}
-
-
-void MainWindow::on_textEdit_undoAvailable(bool b)
-{
-    QInputMethod* input = QGuiApplication::inputMethod();
-    input->setVisible(false);
 }
 
 
@@ -389,6 +384,63 @@ void MainWindow::on_comboBox_5_currentIndexChanged(int index)
         ui->label_5->setText(date.toString("dd/MM/yyyy"));
         QString format = "dd/MM/yyyy";
         f.saveSettings(format);
+    }
+}
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    if(ui->lineEdit->text() == ui->lineEdit_2->text()) {
+        QMessageBox confirm;
+        confirm.setText("Are you sure you want to password protect this app?");
+        confirm.setInformativeText("This cannot be undone");
+        confirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+        confirm.setDefaultButton(QMessageBox::Cancel);
+        int ret = confirm.exec();
+        switch (ret) {
+        case QMessageBox::Cancel:
+            break;
+        case QMessageBox::Ok:
+            QString newPassword = ui->lineEdit->text();
+            f.createPassword(newPassword);
+            QMessageBox::information(
+                this,
+                tr("Application Name"),
+                tr("New Password saved.") );
+            break;
+        }
+    }
+}
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    QString newPassword = ui->lineEdit_5->text();
+    if(password == ui->lineEdit_3->text() && newPassword == ui->lineEdit_4->text()) {
+        f.updatePassword(newPassword);
+        QMessageBox::information(
+            this,
+            tr("Application Name"),
+            tr("Password Updated.") );
+
+    }
+}
+
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    if(ui->lineEdit_6->text() == password && ui->lineEdit_7->text() == password) {
+        f.removePassword();
+        QMessageBox::information(
+            this,
+            tr("Application Name"),
+            tr("Password Removed.") );
+    }
+    else {
+        QMessageBox::information(
+            this,
+            tr("Application Name"),
+            tr("Wrong Password Try Again.") );
     }
 }
 

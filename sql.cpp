@@ -9,7 +9,6 @@
 #include <QSqlDatabase>
 #include <QStandardPaths>
 #include <QFile>
-#include <QDebug>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
 #include <QDate>
@@ -17,6 +16,9 @@
 int spotting, flow, mood, sex, cramps, tender, headache;
 QString DateFormats = "MM/dd/yy";
 QDate cur_Date;
+QString password = "";
+bool passwordProtected = false;
+bool startup = true;
 
 QSqlDatabase db;
 //emits signal to update user interface on app startup
@@ -25,28 +27,35 @@ void sql::changer() {
 }
 
 void sql::Startup() {
+    startup = true;
     QString dbName = "period_underground.sqlite";
     QString dbLocation = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
     //set database to store in users "Documents folder". On Mobile this will stay with the programs sandbox
-    db = QSqlDatabase::addDatabase("QSQLITE");
+    if(db.isDriverAvailable("SQLITECIPHER") == false) {
+        db = QSqlDatabase::addDatabase("QSQLITE");
+    }
+    else {
+        db = QSqlDatabase::addDatabase("SQLITECIPHER");
+    }
     db.setDatabaseName(dbLocation + "/" +dbName);
     db.database(dbLocation + "/" +dbName);
     db.databaseName();
+    db.setPassword(password);
 
     if( QFile::exists(db.databaseName()))
     {
 
-        qDebug()<<"DATABASE EXIST";
         //open database, read all user info and update user interface with new information
         if(db.open())
         {
             QSqlQuery query(db);
             //add settings table for existing databases
-            query.prepare("CREATE TABLE IF NOT EXISTS Settings (ID int not null primary key, DateFormat text)");
+            query.prepare("CREATE TABLE IF NOT EXISTS Settings (ID int not null primary key, DateFormat text, noPassword int)");
             query.exec();
             //load data
             query.prepare("SELECT * FROM Period_Info");
             query.exec();
+            int i = 0;
             while(query.next()) {
                 //cycle through all and paint as needed, reference main window?
                 QString curDate = query.value(0).toString();
@@ -59,8 +68,10 @@ void sql::Startup() {
                 tender = query.value(6).toInt();
                 headache = query.value(7).toInt();
                 changer();
+                i++;
 
         }
+
             //load settings
             query.prepare("SELECT * FROM Settings WHERE ID = (:ID)");
             query.bindValue(0, 1);
@@ -73,33 +84,49 @@ void sql::Startup() {
             else{//leave at default
             }
 
-            qDebug() << "DATABASE OPEN";
             }
         else
         {
-            qDebug() << "DATABASE CLOSED";
+
+        }
+
+        QSqlQuery query(db);
+        query.prepare("SELECT * FROM Settings WHERE ID = 1");
+        query.exec();
+        query.next();
+        //check if password is needed
+        if(query.value(2).toInt() < 1) {
+            passwordProtected = true;
         }
     }
     //create new tables for stored data
     else {
-        qDebug() << "NO EXISTING DATABASE, CREATING ONE";
         db.open();
         QSqlQuery query(db);
         query.prepare("CREATE TABLE IF NOT EXISTS Period_Info (QDate text not null primary key, flow int, mood int, sex int, spotting int, cramps int, tender int, headache int);");
         query.exec();
         query.prepare("CREATE TABLE IF NOT EXISTS Last_Period (QDate text not null primary key);");
         query.exec();
-        query.prepare("CREATE TABLE IF NOT EXISTS Settings (ID int not null primary key, DateFormat text");
+        query.prepare("CREATE TABLE IF NOT EXISTS Settings (ID int not null primary key, DateFormat text, noPassword int)");
+        query.exec();
+        query.prepare("INSERT INTO Settings (ID, noPassword) VALUES (:ID, :noPassword)");
+        query.bindValue(":ID", 1);
+        query.bindValue(":noPassword", 1);
         query.exec();
 
         //error checking
         if(!db.isOpen()) {
-            qDebug() << "ERROR I CAN'T OPEN DATABASE";
         }
 }
+    startup = false;
+    db.close();
 }
 //save user input
 void sql::saveData(QString date, int flow, int mood, int sex, int spotting, int crampsCheck, int tenderCheck, int headacheCheck) {
+    //check if db is open
+    if(db.isOpen() == false) {
+        db.open();
+    }
 
     QSqlQuery query(db);
     //check for already existing rows
@@ -133,33 +160,38 @@ void sql::saveData(QString date, int flow, int mood, int sex, int spotting, int 
         query.bindValue(":QDate", date);
         query.exec();
     }
+    if(startup == true) {}
+    else {db.close();}
 
 }
 //load data pertaining to clicked date on calendar
 void sql::loadData(QString curDate) {
+    if(db.isOpen() == false) {
+        db.open();
+    }
     QSqlQuery query(db);
     query.prepare("SELECT * FROM Period_Info WHERE QDate = (:QDate)");
     query.bindValue(":QDate", curDate);
 
     query.exec();
     query.next();
-    QString debug = query.value(0).toString();
-    qDebug() << debug;
     flow = query.value(1).toInt();
-    qDebug() << flow;
     mood = query.value(2).toInt();
-    qDebug() << mood;
     sex = query.value(3).toInt();
-    qDebug() << sex;
     spotting = query.value(4).toInt();
-    qDebug() << spotting;
     cramps = query.value(5).toInt();
     tender = query.value(6).toInt();
     headache = query.value(7).toInt();
 
+    if(startup == true) {}
+    else {db.close();}
+
 }
 //leave sql database file intact, but delete all user data from database
 void sql::deleteALL(){
+    if(db.isOpen() == false) {
+        db.open();
+    }
     QSqlQuery query(db);
     //delete all rows
     query.prepare("DELETE FROM Period_Info");
@@ -171,28 +203,42 @@ void sql::deleteALL(){
     //vacuum database to ensure no data is left behind
     query.prepare("VACUUM");
     query.exec();
+    db.close();
 }
 //find and return last period start date
 QDate sql::lastPeriodCheck(){
+    if(db.isOpen() == false) {
+        db.open();
+    }
     QSqlQuery query(db);
     query.prepare("SELECT QDate FROM Last_Period");
     query.exec();
     query.last();
     QString transitory = query.value(0).toString();
     QDate lastDate = lastDate.fromString(transitory);
+    if(startup == true) {}
+    else {db.close();}
     return lastDate;
 }
 //add start of new period for period estimator
 void sql::newPeriodDate(QDate date1) {
+    if(db.isOpen() == false) {
+        db.open();
+    }
     QString dateSave = date1.toString();
     QSqlQuery query(db);
     query.prepare("INSERT INTO Last_Period (QDate) VALUES (:QDate)");
     query.bindValue(":QDate", dateSave);
     query.exec();
+    if(startup == true) {}
+    else {db.close();}
 }
 
 //estimate next period
 QDate sql::whenIsPeriod(QDate date2) {
+    if(db.isOpen() == false) {
+        db.open();
+    }
     QSqlQuery query(db);
     query.prepare("SELECT QDate FROM Last_Period");
     query.exec();
@@ -226,11 +272,16 @@ QDate sql::whenIsPeriod(QDate date2) {
     else {
         date2 = date2.addDays(28);
     }
-    qDebug() << date2;
+    if(startup == true) {}
+    else {db.close();}
+
     return(date2);
 }
 
 void sql::saveSettings(QString dateFormat) {
+    if(db.isOpen() == false) {
+        db.open();
+    }
     QSqlQuery query(db);
     //check for already existing rows
     query.prepare("SELECT * FROM Settings");
@@ -250,5 +301,60 @@ void sql::saveSettings(QString dateFormat) {
         query.bindValue(":ID", 1);
         query.exec();
     }
+    if(startup == true) {}
+    else {db.close();}
 
+}
+
+void sql::createPassword(QString newPassword) {
+    db.setPassword(newPassword);
+    db.setConnectOptions("QSQLITE_BUSY_TIMEOUT=5000;QSQLITE_CREATE_KEY");
+    db.open();
+    db.close();
+    password = newPassword;
+    db.setPassword(password);
+}
+
+void sql::updatePassword(QString newPassword) {
+    db.setPassword(password);
+    QString command = "QSQLITE_UPDATE_KEY=" + newPassword;
+    db.setConnectOptions(command);
+    db.open();
+    db.close();
+    password = newPassword;
+    db.setPassword(password);
+}
+
+void sql::removePassword() {
+    db.setPassword(password);
+    db.setConnectOptions("QSQLITE_REMOVE_KEY");
+    db.open();
+    db.close();
+    password = "";
+    db.setPassword(password);
+}
+
+bool sql::wasBleeding(QDate curDate) {
+    int i = 10;
+    bool blood = false;
+    if(db.isOpen() == false) {
+        db.open();
+    }
+    QSqlQuery query(db);
+    while(i > 0) {
+        QString cur_Date = curDate.toString();
+        query.prepare("SELECT * FROM Period_Info WHERE QDate = (:QDate)");
+        query.bindValue(":QDate", cur_Date);
+        query.exec();
+        query.next();
+        int flow = query.value(1).toInt();
+        if(flow >= 1) {
+            blood = true;
+        }
+        curDate = curDate.addDays(-1);
+        i = i-1;
+    }
+    if(startup == true) {}
+    else {db.close();}
+    return blood;
 }

@@ -12,7 +12,8 @@
 
 extern int spotting, flow, mood, sex, cramps, tender, headache;
 extern QDate cur_Date;
-extern QString DateFormats;
+extern QString DateFormats, password;
+extern bool passwordProtected;
 
 class sql : public QObject
 {
@@ -30,6 +31,10 @@ public slots:
     void newPeriodDate(QDate date1);
     QDate whenIsPeriod(QDate date2);
     void saveSettings(QString dateFormat);
+    void createPassword(QString newPassword);
+    void updatePassword(QString newPassword);
+    void removePassword();
+    bool wasBleeding(QDate curDate);
 
 signals:
     void load();
