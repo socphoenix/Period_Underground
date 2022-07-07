@@ -57,6 +57,7 @@ set_target_properties(Period_Underground PROPERTIES
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
     QT_ANDROID_VERSION_NAME 1.0.2
+    QT_ANDROID_VERSION_CODE 2
 
 )
 
