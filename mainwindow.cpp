@@ -198,8 +198,11 @@ void MainWindow::on_comboBox_3_currentIndexChanged(int index)
     QDate currentDate;
     QDate nextPeriod;
     currentDate = ui->calendarWidget->selectedDate();
-    lastPeriod = f.lastPeriodCheck();
-    if(lastPeriod < currentDate.addDays(-3) && flow != 0) {
+    //lastPeriod = f.lastPeriodCheck();
+    bool blood = false;
+    blood = f.wasBleeding(currentDate);
+    //if(lastPeriod < currentDate.addDays(-3) && flow != 0) {
+    if(blood == false) {
         //add new period info
         f.newPeriodDate(currentDate);
         nextPeriod = f.whenIsPeriod(currentDate);

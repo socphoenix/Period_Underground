@@ -34,6 +34,7 @@ public slots:
     void createPassword(QString newPassword);
     void updatePassword(QString newPassword);
     void removePassword();
+    bool wasBleeding(QDate curDate);
 
 signals:
     void load();

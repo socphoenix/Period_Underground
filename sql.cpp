@@ -330,3 +330,26 @@ void sql::removePassword() {
     password = "";
     db.setPassword(password);
 }
+
+bool sql::wasBleeding(QDate curDate) {
+    int i = 10;
+    bool blood = false;
+    if(db.isOpen() == false) {
+        db.open();
+    }
+    QSqlQuery query(db);
+    while(i > 0) {
+        query.prepare("SELECT * FROM Period_Info WHERE QDate = (:QDate)");
+        query.bindValue(":QDate", curDate);
+        query.exec();
+        query.next();
+        int flow = query.value(1).toInt();
+        if(flow >= 1) {
+            blood = true;
+        }
+        curDate = curDate.addDays(-1);
+        i = i-1;
+    }
+    db.close();
+    return blood;
+}
