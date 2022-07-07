@@ -31,7 +31,12 @@ void sql::Startup() {
     QString dbName = "period_underground.sqlite";
     QString dbLocation = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
     //set database to store in users "Documents folder". On Mobile this will stay with the programs sandbox
-    db = QSqlDatabase::addDatabase("SQLITECIPHER");
+    if(db.isDriverAvailable("SQLITECIPHER") == false) {
+        db = QSqlDatabase::addDatabase("QSQLITE");
+    }
+    else {
+        db = QSqlDatabase::addDatabase("SQLITECIPHER");
+    }
     db.setDatabaseName(dbLocation + "/" +dbName);
     db.database(dbLocation + "/" +dbName);
     db.databaseName();
@@ -115,7 +120,6 @@ void sql::Startup() {
 }
     startup = false;
     db.close();
-    qDebug() << startup;
 }
 //save user input
 void sql::saveData(QString date, int flow, int mood, int sex, int spotting, int crampsCheck, int tenderCheck, int headacheCheck) {
@@ -313,7 +317,6 @@ void sql::createPassword(QString newPassword) {
 
 void sql::updatePassword(QString newPassword) {
     db.setPassword(password);
-    qDebug() << db.isOpen();
     QString command = "QSQLITE_UPDATE_KEY=" + newPassword;
     db.setConnectOptions(command);
     db.open();
