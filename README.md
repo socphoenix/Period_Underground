@@ -1,5 +1,8 @@
 # Period_Underground
 
+<b><u><i>This app is now available on the Play Store, please see the Play store marked releases for source code pertaining to the app on the Google Play Store </b></u></i>
+
+
 Period Tracker that keeps all data on device
 This app is a basic QT 6.3 app that works on Windows and Android. It should also compile for Linux and macOS using QT Creator open source editions. The app works to locally store period data and estimate when the next period will be. It does not track fertility, and should not be used as a way to track the Rythm method, Natural Family Planning, or other forms of birth control to prevent pregnancy. It is released under the GNU Public License V3.
 The app uses shades of red to show bleeding, grey for spotting, and green for the next expected period.
@@ -36,4 +39,12 @@ Compiling by command-line:
 Example uses Windows.
 using CMake use the following command on windows to compile using the QT open-source tools (example is for QT 6.3.1):
 "cmake -DCMAKE_PREFIX_PATH=C:\Qt\6.3.1\msvc2019_64 -S <source-dir> -B <build-dir>"
+
+
+To install on Android:
+In order to install these you will need to allow unknown apps, see [here for more info.](https://android.gadgethacks.com/how-to/android-101-sideload-apps-by-enabling-unknown-sources-install-unknown-apps-0161947/)
+
+Library license info:
+Qt Libraries used are Core, GUI, SQL, and are licensed under the GNU Lesser Public License v3 https://www.gnu.org/licenses/lgpl-3.0.html .  The Qt source code for these libraries can be downloaded from https://download.qt.io/official_releases/qt/6.3/6.3.1/single/ . Alternatively you can contact me here on github or at tuc03516@gmail.com for a copy of the source code.
+SQlite is licensed under the public domain.
 
