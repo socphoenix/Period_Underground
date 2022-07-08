@@ -20,6 +20,7 @@ QString password = "";
 bool passwordProtected = false;
 bool startup = true;
 bool symptoms[5];
+int daysOut[5];
 
 QSqlDatabase db;
 //emits signal to update user interface on app startup
@@ -376,28 +377,38 @@ void sql::symptomEstimator() {
     query.prepare("SELECT * FROM Last_Period");
     query.exec();
     while(query.next()) {
+        int howMany = -1;
         QString date = query.value(0).toString();
         QDate date1 = date1.fromString(date);
-        //this point on needs modification, how are we checking days out?
-        date1 = date1.addDays(-1);
-        query2.prepare("SELECT * FROM Period_Info WHERE QDate = (:QDate)");
-        query2.bindValue(0, date);
-        query2.exec();
-        query2.next();
-        if(query2.value(2).toInt() > 0) {
-            symptoms[0] = true;
+        //this point on needs modification, how are we checking days out? assume while loop but then what?
+        while(howMany > -8) {
+            date1 = date1.addDays(-1);
+            query2.prepare("SELECT * FROM Period_Info WHERE QDate = (:QDate)");
+            query2.bindValue(":QDate", date1.toString());
+            query2.exec();
+            query2.next();
+            if(query2.value(2).toInt() > 0) {
+                daysOut[0] = howMany;
+                symptoms[0] = true;
+            }
+            if(query2.value(4).toInt() > 0) {
+                daysOut[1] = howMany;
+                symptoms[1] = true;
+            }
+            if(query2.value(5).toInt() > 0) {
+                daysOut[2] = howMany;
+                symptoms[2] = true;
+            }
+            if(query2.value(6).toInt() > 0) {
+                daysOut[3] = howMany;
+                symptoms[3] = true;
+            }
+            if(query2.value(7).toInt() > 0) {
+                daysOut[4] = howMany;
+                symptoms[4] = true;
+            }
+            howMany = howMany-1;
         }
-        if(query2.value(4).toInt() > 0) {
-            symptoms[1] = true;
-        }
-        if(query2.value(5).toInt() > 0) {
-            symptoms[2] = true;
-        }
-        if(query2.value(6).toInt() > 0) {
-            symptoms[3] = true;
-        }
-        if(query2.value(7).toInt() > 0) {
-            symptoms[4] = true;
-        }
+
     }
 }

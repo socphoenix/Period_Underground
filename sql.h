@@ -15,7 +15,7 @@ extern QDate cur_Date;
 extern QString DateFormats, password;
 extern bool passwordProtected;
 extern bool symptoms[5];
-
+extern int daysOut[5];
 class sql : public QObject
 {
     Q_OBJECT;
