@@ -19,6 +19,7 @@ QDate cur_Date;
 QString password = "";
 bool passwordProtected = false;
 bool startup = true;
+bool symptoms[5];
 
 QSqlDatabase db;
 //emits signal to update user interface on app startup
@@ -357,4 +358,46 @@ bool sql::wasBleeding(QDate curDate) {
     if(startup == true) {}
     else {db.close();}
     return blood;
+}
+
+void sql::symptomEstimator() {
+    //iterate through symptoms specifically, and create booleans for each
+    // mood, spotting, cramps, tender, headache.
+    symptoms[0] = false;
+    symptoms[1] = false;
+    symptoms[2] = false;
+    symptoms[3] = false;
+    symptoms[4] = false;
+    if(db.isOpen() == false) {
+        db.open();
+    }
+    QSqlQuery query(db);
+    QSqlQuery query2(db);
+    query.prepare("SELECT * FROM Last_Period");
+    query.exec();
+    while(query.next()) {
+        QString date = query.value(0).toString();
+        QDate date1 = date1.fromString(date);
+        //this point on needs modification, how are we checking days out?
+        date1 = date1.addDays(-1);
+        query2.prepare("SELECT * FROM Period_Info WHERE QDate = (:QDate)");
+        query2.bindValue(0, date);
+        query2.exec();
+        query2.next();
+        if(query2.value(2).toInt() > 0) {
+            symptoms[0] = true;
+        }
+        if(query2.value(4).toInt() > 0) {
+            symptoms[1] = true;
+        }
+        if(query2.value(5).toInt() > 0) {
+            symptoms[2] = true;
+        }
+        if(query2.value(6).toInt() > 0) {
+            symptoms[3] = true;
+        }
+        if(query2.value(7).toInt() > 0) {
+            symptoms[4] = true;
+        }
+    }
 }
