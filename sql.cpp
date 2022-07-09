@@ -437,5 +437,6 @@ void sql::symptomEstimator() {
         }
         i++;
     }
-
+    if(startup == true) {}
+    else {db.close();}
 }
