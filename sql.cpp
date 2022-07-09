@@ -399,6 +399,7 @@ void sql::symptomEstimator() {
             query2.bindValue(":QDate", date1.toString());
             query2.exec();
             query2.next();
+            //check which mood in particular?
             if(query2.value(2).toInt() > 0) {
                 daysOut[0] = daysOut[0] + howMany;
                 daysOutAverage[0] = daysOutAverage[0]+1;

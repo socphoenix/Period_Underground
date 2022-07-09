@@ -259,7 +259,7 @@
         <item row="6" column="0">
          <widget class="QLabel" name="label_24">
           <property name="text">
-           <string>Tenderness</string>
+           <string>Tender Breasts</string>
           </property>
          </widget>
         </item>
@@ -319,7 +319,7 @@
         <item row="3" column="0">
          <widget class="QLabel" name="label_26">
           <property name="text">
-           <string>Moodiness</string>
+           <string>Mood Changes</string>
           </property>
          </widget>
         </item>
