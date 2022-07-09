@@ -1,6 +1,6 @@
 # Period_Underground
 
-<b><u><i>This app is now available on the Play Store, please see the Play store marked releases for source code pertaining to the app on the Google Play Store </b></u></i>
+<b><u><i>This app is now available on the Play Store!</b></u></i>
 
 
 Period Tracker that keeps all data on device
@@ -10,6 +10,7 @@ The app uses shades of red to show bleeding, grey for spotting, and green for th
 ![image](https://user-images.githubusercontent.com/18272432/176724435-c08d61c0-8dc4-462e-96a7-03bd83dcb3e4.png)
 ![image](https://user-images.githubusercontent.com/18272432/176724619-78065ebf-b2cd-4983-9cec-b4918c65e777.png)
 ![Screen Shot 2022-07-07 at 12 09 13 PM](https://user-images.githubusercontent.com/18272432/177840774-0353bc60-951d-436d-9a4f-2d7aa422108b.png)
+![Screenshot_2022-07-09-11-45-53](https://user-images.githubusercontent.com/18272432/178116792-f0eaa7f4-510c-43a9-b8dd-63471294e44f.png)
 
 
 Notes on Database usage/encryption:
