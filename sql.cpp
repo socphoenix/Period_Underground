@@ -398,7 +398,6 @@ void sql::symptomEstimator() {
         QDate date1 = date1.fromString(date);
         //this point on needs modification, how are we checking days out? assume while loop but then what?
         while(howMany > -8) {
-            qDebug() << "Second while loop";
             date1 = date1.addDays(-1);
             query2.prepare("SELECT * FROM Period_Info WHERE QDate = (:QDate)");
             query2.bindValue(":QDate", date1.toString());
@@ -435,12 +434,13 @@ void sql::symptomEstimator() {
 
     }
     int i = 0;
+     // mood, spotting, cramps, tender, headache.
     while(i < 5) {
         if(symptoms[i] == true && daysOut[i] != 0) {
             daysOut[i] = daysOut[i] / daysOutAverage[i];
             i++;
         }
-        i++;
+        else {i++;}
     }
     if(startup == true) {}
     else {db.close();}
