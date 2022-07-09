@@ -19,6 +19,8 @@ QDate cur_Date;
 QString password = "";
 bool passwordProtected = false;
 bool startup = true;
+bool symptoms[5];
+int daysOut[5];
 
 QSqlDatabase db;
 //emits signal to update user interface on app startup
@@ -236,11 +238,12 @@ void sql::newPeriodDate(QDate date1) {
 
 //estimate next period
 QDate sql::whenIsPeriod(QDate date2) {
+    QDate date3 = date2;
     if(db.isOpen() == false) {
         db.open();
     }
     QSqlQuery query(db);
-    query.prepare("SELECT QDate FROM Last_Period");
+    query.prepare("SELECT * FROM Last_Period");
     query.exec();
     int i = 0;
     int daysBetween = 0;
@@ -251,19 +254,21 @@ QDate sql::whenIsPeriod(QDate date2) {
         i++;
         if(i < 2) {
             transit = query.value(0).toString();
-            first.fromString(transit);
+            first = first.fromString(transit);
         }
         else if(i == 2){
             transit = query.value(0).toString();
-            current.fromString(transit);
-            daysBetween = first.daysTo(current);
+            current = current.fromString(transit);
+            daysBetween = daysBetween + first.daysTo(current);
+            first = current;
         }
         else {
             first = current;
             transit = query.value(0).toString();
-            current.fromString(transit);
+            current = current.fromString(transit);
             daysBetween = daysBetween + first.daysTo(current);
         }
+
     }
     if(i > 5) {
         daysBetween = daysBetween / i;
@@ -357,4 +362,86 @@ bool sql::wasBleeding(QDate curDate) {
     if(startup == true) {}
     else {db.close();}
     return blood;
+}
+
+void sql::symptomEstimator() {
+    //iterate through symptoms specifically, and create booleans for each
+    // mood, spotting, cramps, tender, headache.
+    symptoms[0] = false;
+    symptoms[1] = false;
+    symptoms[2] = false;
+    symptoms[3] = false;
+    symptoms[4] = false;
+    daysOut[0] = 0;
+    daysOut[1] = 0;
+    daysOut[2] = 0;
+    daysOut[3] = 0;
+    daysOut[4] = 0;
+    if(db.isOpen() == false) {
+        db.open();
+    }
+    QSqlQuery query(db);
+    QSqlQuery query2(db);
+    query.prepare("SELECT * FROM Last_Period");
+    query.exec();
+    int daysOutAverage[5];
+    daysOutAverage[0] = 0;
+    daysOutAverage[1] = 0;
+    daysOutAverage[2] = 0;
+    daysOutAverage[3] = 0;
+    daysOutAverage[4] = 0;
+    while(query.next()) {
+        int howMany = -1;
+       //initialize average counting
+
+        QString date = query.value(0).toString();
+        QDate date1 = date1.fromString(date);
+        //this point on needs modification, how are we checking days out? assume while loop but then what?
+        while(howMany > -8) {
+            date1 = date1.addDays(-1);
+            query2.prepare("SELECT * FROM Period_Info WHERE QDate = (:QDate)");
+            query2.bindValue(":QDate", date1.toString());
+            query2.exec();
+            query2.next();
+            //check which mood in particular?
+            if(query2.value(2).toInt() > 0) {
+                daysOut[0] = daysOut[0] + howMany;
+                daysOutAverage[0] = daysOutAverage[0]+1;
+                symptoms[0] = true;
+            }
+            if(query2.value(4).toInt() > 0) {
+                daysOut[1] = daysOut[1] + howMany;
+                daysOutAverage[1] = daysOutAverage[1]+1;
+                symptoms[1] = true;
+            }
+            if(query2.value(5).toInt() > 0) {
+                daysOut[2] = daysOut[2] + howMany;
+                daysOutAverage[2] = daysOutAverage[2]+1;
+                symptoms[2] = true;
+            }
+            if(query2.value(6).toInt() > 0) {
+                daysOut[3] = daysOut[3] + howMany;
+                daysOutAverage[3] = daysOutAverage[3]+1;
+                symptoms[3] = true;
+            }
+            if(query2.value(7).toInt() > 0) {
+                daysOut[4] = daysOut[4] + howMany;
+                daysOutAverage[4] = daysOutAverage[4]+1;
+                symptoms[4] = true;
+            }
+            howMany = howMany-1;
+        }
+
+    }
+    int i = 0;
+     // mood, spotting, cramps, tender, headache.
+    while(i < 5) {
+        if(symptoms[i] == true && daysOut[i] != 0) {
+            daysOut[i] = daysOut[i] / daysOutAverage[i];
+            i++;
+        }
+        else {i++;}
+    }
+    if(startup == true) {}
+    else {db.close();}
 }

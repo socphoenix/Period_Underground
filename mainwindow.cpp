@@ -60,6 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
     if(DateFormats == "dd/MM/yyyy") {
         ui->comboBox_5->setCurrentIndex(1);
     }
+    Estimator();
 
 }
 
@@ -227,6 +228,7 @@ void MainWindow::on_comboBox_3_currentIndexChanged(int index)
                 i++;
             }
         }
+        Estimator();
     }
     else if(lastPeriod.isValid() == false) {
         f.newPeriodDate(currentDate);
@@ -441,6 +443,27 @@ void MainWindow::on_pushButton_4_clicked()
             this,
             tr("Application Name"),
             tr("Wrong Password Try Again.") );
+    }
+}
+
+void MainWindow::Estimator() {
+    f.symptomEstimator();
+    QDate when = f.whenIsPeriod(f.lastPeriodCheck());
+    //moodiness, spotting, cramps, tenderness, headache.
+    if(symptoms[0] == true) {
+        ui->moodiness->setText(when.addDays(daysOut[0]).toString());
+    }
+    if(symptoms[1] == true) {
+        ui->spotting->setText(when.addDays(daysOut[1]).toString());
+    }
+    if(symptoms[2] == true) {
+        ui->cramps->setText(when.addDays(daysOut[2]).toString());
+    }
+    if(symptoms[3] == true) {
+        ui->tenderness->setText(when.addDays(daysOut[3]).toString());
+    }
+    if(symptoms[4] == true) {
+        ui->headache->setText(when.addDays(daysOut[4]).toString());
     }
 }
 

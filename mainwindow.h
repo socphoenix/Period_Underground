@@ -48,6 +48,8 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void Estimator();
+
 public slots:
     void updateUI();
     //need to create a signal/slot to update UI from reading of sql
