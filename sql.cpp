@@ -372,6 +372,11 @@ void sql::symptomEstimator() {
     symptoms[2] = false;
     symptoms[3] = false;
     symptoms[4] = false;
+    daysOut[0] = 0;
+    daysOut[1] = 0;
+    daysOut[2] = 0;
+    daysOut[3] = 0;
+    daysOut[4] = 0;
     if(db.isOpen() == false) {
         db.open();
     }
