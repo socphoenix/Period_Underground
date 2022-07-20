@@ -254,7 +254,6 @@ QDate sql::whenIsPeriod(QDate date2) {
     //if average is disabled add 28 days and do no math
     if(query.value(2).toInt() == 2) {
         date2 = date2.addDays(28);
-        qDebug() << "Fuck you and your averages";
     }
     //default, average days to adapt to irregular periods
     else {
