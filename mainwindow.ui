@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>401</width>
-    <height>669</height>
+    <width>402</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="focusPolicy">
@@ -372,29 +372,25 @@
         <string>Settings</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="5" column="1">
-         <widget class="QLineEdit" name="lineEdit"/>
-        </item>
-        <item row="16" column="0">
+        <item row="18" column="0">
          <widget class="QLabel" name="label_20">
           <property name="text">
            <string>Current Password</string>
           </property>
          </widget>
         </item>
-        <item row="8" column="1">
-         <widget class="Line" name="line_9">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+        <item row="13" column="1">
+         <widget class="QLineEdit" name="lineEdit_4"/>
+        </item>
+        <item row="8" column="0">
+         <widget class="QLabel" name="label_22">
+          <property name="text">
+           <string>Retype New Password:</string>
           </property>
          </widget>
         </item>
-        <item row="10" column="0">
-         <widget class="QLabel" name="label_16">
-          <property name="text">
-           <string>Old Password</string>
-          </property>
-         </widget>
+        <item row="7" column="1">
+         <widget class="QLineEdit" name="lineEdit"/>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label_10">
@@ -403,59 +399,38 @@
           </property>
          </widget>
         </item>
-        <item row="14" column="0">
+        <item row="12" column="0">
+         <widget class="QLabel" name="label_16">
+          <property name="text">
+           <string>Old Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="1">
+         <widget class="Line" name="line_9">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="16" column="0">
          <widget class="Line" name="line_10">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item row="17" column="0">
-         <widget class="QLabel" name="label_21">
+        <item row="14" column="1">
+         <widget class="QLineEdit" name="lineEdit_5"/>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushButton">
           <property name="text">
-           <string>Retype Current Password</string>
+           <string>Delete Data</string>
           </property>
          </widget>
         </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="label_14">
-          <property name="text">
-           <string>Create New Password:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="17" column="1">
-         <widget class="QLineEdit" name="lineEdit_7"/>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>Change date format</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="0">
-         <widget class="QLabel" name="label_15">
-          <property name="text">
-           <string>Update Password:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="15" column="0">
-         <widget class="QLabel" name="label_19">
-          <property name="text">
-           <string>Remove Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0">
-         <widget class="QPushButton" name="pushButton_2">
-          <property name="text">
-           <string>Save Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
+        <item row="4" column="1">
          <widget class="QComboBox" name="comboBox_5">
           <item>
            <property name="text">
@@ -469,25 +444,57 @@
           </item>
          </widget>
         </item>
-        <item row="10" column="1">
-         <widget class="QLineEdit" name="lineEdit_3"/>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="pushButton">
+        <item row="19" column="0">
+         <widget class="QLabel" name="label_21">
           <property name="text">
-           <string>Delete Data</string>
+           <string>Retype Current Password</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
+        <item row="14" column="0">
+         <widget class="QLabel" name="label_18">
+          <property name="text">
+           <string>Retype New Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="Line" name="line_14">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="0">
+         <widget class="QLabel" name="label_15">
+          <property name="text">
+           <string>Update Password:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="18" column="1">
+         <widget class="QLineEdit" name="lineEdit_6"/>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>Change date format</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
          <widget class="Line" name="line_7">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item row="11" column="1">
-         <widget class="QLineEdit" name="lineEdit_4"/>
+        <item row="15" column="0">
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="text">
+           <string>Save New Password</string>
+          </property>
+         </widget>
         </item>
         <item row="1" column="0">
          <spacer name="verticalSpacer_2">
@@ -502,70 +509,104 @@
           </property>
          </spacer>
         </item>
-        <item row="11" column="0">
-         <widget class="QLabel" name="label_17">
-          <property name="text">
-           <string>New Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="0">
-         <widget class="Line" name="line_8">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="12" column="0">
-         <widget class="QLabel" name="label_18">
-          <property name="text">
-           <string>Retype New Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="18" column="0">
+        <item row="20" column="0">
          <widget class="QPushButton" name="pushButton_4">
           <property name="text">
            <string>Remove Password</string>
           </property>
          </widget>
         </item>
-        <item row="13" column="0">
-         <widget class="QPushButton" name="pushButton_3">
+        <item row="8" column="1">
+         <widget class="QLineEdit" name="lineEdit_2"/>
+        </item>
+        <item row="17" column="0">
+         <widget class="QLabel" name="label_19">
           <property name="text">
-           <string>Save New Password</string>
+           <string>Remove Password</string>
           </property>
          </widget>
         </item>
-        <item row="16" column="1">
-         <widget class="QLineEdit" name="lineEdit_6"/>
+        <item row="9" column="0">
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>Save Password</string>
+          </property>
+         </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="Line" name="line_6">
+        <item row="10" column="0">
+         <widget class="Line" name="line_8">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item row="12" column="1">
-         <widget class="QLineEdit" name="lineEdit_5"/>
+        <item row="19" column="1">
+         <widget class="QLineEdit" name="lineEdit_7"/>
         </item>
-        <item row="14" column="1">
+        <item row="16" column="1">
          <widget class="Line" name="line_11">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="label_22">
-          <property name="text">
-           <string>Retype New Password:</string>
+        <item row="5" column="0">
+         <widget class="Line" name="line_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item row="6" column="1">
-         <widget class="QLineEdit" name="lineEdit_2"/>
+        <item row="13" column="0">
+         <widget class="QLabel" name="label_17">
+          <property name="text">
+           <string>New Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Create New Password:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="1">
+         <widget class="QLineEdit" name="lineEdit_3"/>
+        </item>
+        <item row="2" column="1">
+         <widget class="Line" name="line_15">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_28">
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable app to average past periods when estimating next period. &lt;/p&gt;&lt;p&gt;If set to No defaults to 28 day cycles&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="whatsThis">
+           <string/>
+          </property>
+          <property name="text">
+           <string>Enable Period Average</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QComboBox" name="comboBox_6">
+          <item>
+           <property name="text">
+            <string>Yes (Default)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>No</string>
+           </property>
+          </item>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -580,6 +621,7 @@
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This App is made with privacy in mind. All user inputs are stored locally on the phone, and does not send user data off the device. It features a quick deletion method in the settings to remove data on the device, as well as the option to encrypt the database the data is stored on.&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;This app is not meant to track fertility and should not be used to determine when one's fertile days are. &lt;/p&gt;
@@ -615,6 +657,7 @@ p, li { white-space: pre-wrap; }
                <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This program itself is licensed under the GNU GPL V3 license, but there are many libraries that helped build this program that have their own licenses. Below is a short overview of which libraries use which licenses. On the tabs to the right is the individual licenses.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
@@ -655,6 +698,7 @@ p, li { white-space: pre-wrap; }
                <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Menlo'; color:#000000;&quot;&gt;        GNU GENERAL PUBLIC LICENSE&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Menlo'; color:#000000;&quot;&gt;        Version 3, 29 June 2007&lt;/span&gt;&lt;/p&gt;
@@ -1342,6 +1386,7 @@ p, li { white-space: pre-wrap; }
                <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Menlo'; color:#000000;&quot;&gt;                   GNU LESSER GENERAL PUBLIC LICENSE&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Menlo'; color:#000000;&quot;&gt;                       Version 3, 29 June 2007&lt;/span&gt;&lt;/p&gt;
@@ -1524,6 +1569,7 @@ p, li { white-space: pre-wrap; }
                <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;                  GNU LESSER GENERAL PUBLIC LICENSE&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;                       Version 2.1, February 1999&lt;/p&gt;
@@ -2034,6 +2080,7 @@ p, li { white-space: pre-wrap; }
                <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;MIT License&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
@@ -2072,6 +2119,7 @@ p, li { white-space: pre-wrap; }
                <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt; wxWindows Library Licence, Version 3.1&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;              ======================================&lt;/p&gt;

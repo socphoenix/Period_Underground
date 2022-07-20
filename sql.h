@@ -10,7 +10,7 @@
 #include <QString>
 #include <QObject>
 
-extern int spotting, flow, mood, sex, cramps, tender, headache;
+extern int spotting, flow, mood, sex, cramps, tender, headache, noAverage;
 extern QDate cur_Date;
 extern QString DateFormats, password;
 extern bool passwordProtected;
@@ -37,6 +37,7 @@ public slots:
     void removePassword();
     bool wasBleeding(QDate curDate);
     void symptomEstimator();
+    void noAverages(int number);
 
 signals:
     void load();

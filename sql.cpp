@@ -13,7 +13,7 @@
 #include <QSqlQueryModel>
 #include <QDate>
 
-int spotting, flow, mood, sex, cramps, tender, headache;
+int spotting, flow, mood, sex, cramps, tender, headache, noAverage;
 QString DateFormats = "MM/dd/yy";
 QDate cur_Date;
 QString password = "";
@@ -86,6 +86,11 @@ void sql::Startup() {
             else{//leave at default
             }
 
+            //check if averages are disabled
+            if(query.value(2).toInt() == 2) {
+                noAverage = 2;
+            }
+            else {noAverage = 1;}
             }
         else
         {
@@ -243,40 +248,52 @@ QDate sql::whenIsPeriod(QDate date2) {
         db.open();
     }
     QSqlQuery query(db);
-    query.prepare("SELECT * FROM Last_Period");
+    query.prepare("SELECT * FROM Settings");
     query.exec();
-    int i = 0;
-    int daysBetween = 0;
-    QDate first;
-    QDate current;
-    QString transit;
-    while(query.next()) {
-        i++;
-        if(i < 2) {
-            transit = query.value(0).toString();
-            first = first.fromString(transit);
+    query.next();
+    //if average is disabled add 28 days and do no math
+    if(query.value(2).toInt() == 2) {
+        date2 = date2.addDays(28);
+        qDebug() << "Fuck you and your averages";
+    }
+    //default, average days to adapt to irregular periods
+    else {
+        query.prepare("SELECT * FROM Last_Period");
+        query.exec();
+        int i = 0;
+        int daysBetween = 0;
+        QDate first;
+        QDate current;
+        QString transit;
+        while(query.next()) {
+            i++;
+            if(i < 2) {
+                transit = query.value(0).toString();
+                first = first.fromString(transit);
+            }
+            else if(i == 2){
+                transit = query.value(0).toString();
+                current = current.fromString(transit);
+                daysBetween = daysBetween + first.daysTo(current);
+                first = current;
+            }
+            else {
+                first = current;
+                transit = query.value(0).toString();
+                current = current.fromString(transit);
+                daysBetween = daysBetween + first.daysTo(current);
+            }
+
         }
-        else if(i == 2){
-            transit = query.value(0).toString();
-            current = current.fromString(transit);
-            daysBetween = daysBetween + first.daysTo(current);
-            first = current;
+        if(i > 5) {
+            daysBetween = daysBetween / i;
+            date2 = date2.addDays(daysBetween);
         }
         else {
-            first = current;
-            transit = query.value(0).toString();
-            current = current.fromString(transit);
-            daysBetween = daysBetween + first.daysTo(current);
+            date2 = date2.addDays(28);
         }
+    }
 
-    }
-    if(i > 5) {
-        daysBetween = daysBetween / i;
-        date2 = date2.addDays(daysBetween);
-    }
-    else {
-        date2 = date2.addDays(28);
-    }
     if(startup == true) {}
     else {db.close();}
 
@@ -442,6 +459,20 @@ void sql::symptomEstimator() {
         }
         else {i++;}
     }
+    if(startup == true) {}
+    else {db.close();}
+}
+
+void sql::noAverages(int number) {
+    if(db.isOpen() == false) {
+        db.open();
+    }
+
+    QSqlQuery query(db);
+    query.prepare("UPDATE Settings SET noPassword=:Password WHERE ID=:ID");
+    query.bindValue(":Password", number);
+    query.bindValue(":ID", 1);
+    query.exec();
     if(startup == true) {}
     else {db.close();}
 }
