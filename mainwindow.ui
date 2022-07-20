@@ -108,6 +108,9 @@
           <property name="focusPolicy">
            <enum>Qt::NoFocus</enum>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Calendar View uses the following color codes:&lt;/p&gt;&lt;p&gt;Green - next expected period&lt;/p&gt;&lt;p&gt;Grey - spotting&lt;/p&gt;&lt;p&gt;Pink - light flow&lt;/p&gt;&lt;p&gt;Red - medium flow&lt;/p&gt;&lt;p&gt;Maroon - heavy flow&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="verticalHeaderFormat">
            <enum>QCalendarWidget::NoVerticalHeader</enum>
           </property>
@@ -372,56 +375,112 @@
         <string>Settings</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="18" column="0">
-         <widget class="QLabel" name="label_20">
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_9">
           <property name="text">
-           <string>Current Password</string>
+           <string>Change date format</string>
           </property>
          </widget>
         </item>
-        <item row="13" column="1">
-         <widget class="QLineEdit" name="lineEdit_4"/>
+        <item row="16" column="0">
+         <widget class="QLabel" name="label_19">
+          <property name="text">
+           <string>Remove Password</string>
+          </property>
+         </widget>
         </item>
-        <item row="8" column="0">
+        <item row="5" column="1">
+         <widget class="Line" name="line_7">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="14" column="0">
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="text">
+           <string>Save New Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_28">
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable app to average past periods when estimating next period. &lt;/p&gt;&lt;p&gt;If set to No defaults to 28 day cycles&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="whatsThis">
+           <string/>
+          </property>
+          <property name="text">
+           <string>Enable Period Average</string>
+          </property>
+         </widget>
+        </item>
+        <item row="19" column="0">
+         <widget class="QPushButton" name="pushButton_4">
+          <property name="text">
+           <string>Remove Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0">
+         <widget class="Line" name="line_8">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button will remove all user &lt;/p&gt;&lt;p&gt;data&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
          <widget class="QLabel" name="label_22">
           <property name="text">
            <string>Retype New Password:</string>
           </property>
          </widget>
         </item>
-        <item row="7" column="1">
-         <widget class="QLineEdit" name="lineEdit"/>
+        <item row="12" column="1">
+         <widget class="QLineEdit" name="lineEdit_4"/>
         </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button will remove all user &lt;/p&gt;&lt;p&gt;data provided to the app&lt;/p&gt;&lt;p&gt;permanently! &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-         </widget>
-        </item>
-        <item row="12" column="0">
-         <widget class="QLabel" name="label_16">
-          <property name="text">
-           <string>Old Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="10" column="1">
-         <widget class="Line" name="line_9">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="16" column="0">
+        <item row="15" column="0">
          <widget class="Line" name="line_10">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item row="14" column="1">
-         <widget class="QLineEdit" name="lineEdit_5"/>
+        <item row="13" column="0">
+         <widget class="QLabel" name="label_18">
+          <property name="text">
+           <string>Retype New Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="15" column="1">
+         <widget class="Line" name="line_11">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="Line" name="line_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="17" column="0">
+         <widget class="QLabel" name="label_20">
+          <property name="text">
+           <string>Current Password</string>
+          </property>
+         </widget>
         </item>
         <item row="0" column="1">
          <widget class="QPushButton" name="pushButton">
@@ -430,7 +489,95 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
+        <item row="7" column="1">
+         <widget class="QLineEdit" name="lineEdit_2"/>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Create New Password:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="1">
+         <widget class="QLineEdit" name="lineEdit_3"/>
+        </item>
+        <item row="9" column="1">
+         <widget class="Line" name="line_9">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="0">
+         <widget class="QLabel" name="label_17">
+          <property name="text">
+           <string>New Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="0">
+         <widget class="QLabel" name="label_16">
+          <property name="text">
+           <string>Old Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="Line" name="line_14">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="17" column="1">
+         <widget class="QLineEdit" name="lineEdit_6"/>
+        </item>
+        <item row="8" column="0">
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>Save Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="18" column="1">
+         <widget class="QLineEdit" name="lineEdit_7"/>
+        </item>
+        <item row="13" column="1">
+         <widget class="QLineEdit" name="lineEdit_5"/>
+        </item>
+        <item row="18" column="0">
+         <widget class="QLabel" name="label_21">
+          <property name="text">
+           <string>Retype Current Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLineEdit" name="lineEdit"/>
+        </item>
+        <item row="10" column="0">
+         <widget class="QLabel" name="label_15">
+          <property name="text">
+           <string>Update Password:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QComboBox" name="comboBox_6">
+          <item>
+           <property name="text">
+            <string>Yes (Default)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>No</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="3" column="1">
          <widget class="QComboBox" name="comboBox_5">
           <item>
            <property name="text">
@@ -444,168 +591,11 @@
           </item>
          </widget>
         </item>
-        <item row="19" column="0">
-         <widget class="QLabel" name="label_21">
-          <property name="text">
-           <string>Retype Current Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="14" column="0">
-         <widget class="QLabel" name="label_18">
-          <property name="text">
-           <string>Retype New Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="Line" name="line_14">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="11" column="0">
-         <widget class="QLabel" name="label_15">
-          <property name="text">
-           <string>Update Password:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="18" column="1">
-         <widget class="QLineEdit" name="lineEdit_6"/>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>Change date format</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="Line" name="line_7">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="15" column="0">
-         <widget class="QPushButton" name="pushButton_3">
-          <property name="text">
-           <string>Save New Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="20" column="0">
-         <widget class="QPushButton" name="pushButton_4">
-          <property name="text">
-           <string>Remove Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1">
-         <widget class="QLineEdit" name="lineEdit_2"/>
-        </item>
-        <item row="17" column="0">
-         <widget class="QLabel" name="label_19">
-          <property name="text">
-           <string>Remove Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="0">
-         <widget class="QPushButton" name="pushButton_2">
-          <property name="text">
-           <string>Save Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="10" column="0">
-         <widget class="Line" name="line_8">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="19" column="1">
-         <widget class="QLineEdit" name="lineEdit_7"/>
-        </item>
-        <item row="16" column="1">
-         <widget class="Line" name="line_11">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="Line" name="line_6">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="13" column="0">
-         <widget class="QLabel" name="label_17">
-          <property name="text">
-           <string>New Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="label_14">
-          <property name="text">
-           <string>Create New Password:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="12" column="1">
-         <widget class="QLineEdit" name="lineEdit_3"/>
-        </item>
-        <item row="2" column="1">
+        <item row="1" column="1">
          <widget class="Line" name="line_15">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_28">
-          <property name="toolTip">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable app to average past periods when estimating next period. &lt;/p&gt;&lt;p&gt;If set to No defaults to 28 day cycles&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="whatsThis">
-           <string/>
-          </property>
-          <property name="text">
-           <string>Enable Period Average</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QComboBox" name="comboBox_6">
-          <item>
-           <property name="text">
-            <string>Yes (Default)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>No</string>
-           </property>
-          </item>
          </widget>
         </item>
        </layout>
