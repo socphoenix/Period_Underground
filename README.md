@@ -13,7 +13,7 @@ The app uses shades of red to show bleeding, grey for spotting, and green for th
 
 
 Notes on Database usage/encryption:
-This branch of the repository is source code modified to be able to use encryption, primarily to use for the Google Play Store. You will need to complile the encryption modules from source.
+While the Google Play Store download has encryption libraries in it, none of the programs for download here have it to make certain this repo is in compliance with export laws. You will need to build it from source, which you can find here: https://github.com/devbean/QtCipherSqlitePlugin
 
 Library license info:
 This has been put in front of building instructions due to the number of developers whose open source contributions helped make this app possible.
