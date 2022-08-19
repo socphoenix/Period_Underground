@@ -40,6 +40,9 @@ MainWindow::MainWindow(QWidget *parent)
         password = enterPassword.getText(0, "Enter Password", "or hit cancel for none", QLineEdit::Password);
         f.Startup();
     }
+    noAverage = noAverage - 1;
+    qDebug() << noAverage;
+    ui->comboBox_6->setCurrentIndex(noAverage);
 
     QDate test = f.lastPeriodCheck();
     QDate test1;
@@ -465,5 +468,12 @@ void MainWindow::Estimator() {
     if(symptoms[4] == true) {
         ui->headache->setText(when.addDays(daysOut[4]).toString());
     }
+}
+
+
+void MainWindow::on_comboBox_6_currentIndexChanged(int index)
+{
+    index = index + 1;
+    f.noAverages(index);
 }
 
