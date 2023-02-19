@@ -18,7 +18,7 @@ While the Google Play Store download has encryption libraries in it, none of the
 Library license info:
 This has been put in front of building instructions due to the number of developers whose open source contributions helped make this app possible.
 
-<b><u>Qt libraries used are Core, GUI, and SQL</u></b> which are licensed under the GNU Lesser Public License v3 https://www.gnu.org/licenses/lgpl-3.0.html .  The Qt source code for all of these libraries can be downloaded from https://download.qt.io/official_releases/qt/6.3/6.3.1/single/ . Alternatively you can contact me here on github or at tuc03516@gmail.com for a copy of the source code.
+<b><u>Qt libraries used are Core, GUI, and SQL</u></b> which are licensed under the GNU Lesser Public License v3 https://www.gnu.org/licenses/lgpl-3.0.html .  The Qt source code for all of these libraries can be downloaded from https://download.qt.io/official_releases/qt/6.3/6.3.2/single/ . Alternatively you can contact me here on github or at tuc03516@gmail.com for a copy of the source code.
 
 <b><u>SQlite</u></b> is licensed under the public domain. It's source code can be found at https://sqlite.org/src/doc/trunk/README.md .
 
@@ -31,21 +31,21 @@ This has been put in front of building instructions due to the number of develop
 <b><u>Building Instructions.</u></b>
 While this can be compiled on the command line it will be much simpler to use the tools Qt provides. The onine installer can be found at https://www.qt.io/download-qt-installer.
 
-Make sure to install cmake using this tool. From here you can either set up qt creator to build for your architecture (recommended) as well as for other devices like Android. Due to US Export laws this program cannot be sent in compiled form. In order to get the library needed you will need to compile it. There are directions at https://github.com/devbean/QtCipherSqlitePlugin , and can be downloaded from them or from my forked repository at https://github.com/socphoenix/QtCipherSqlitePlugin . Once compiled it will need to go into your Qt installation folder. For instance for macOS go to your Qt installation folder/6.3.1/macos/plugins/sqldrivers. Once this step is done from Qt Creator select Open Project and navigate to the folder containing the source code of this project. Select CMakeLists.txt, and click Open. QT Creator will ask to adjust CMake to match your current configurations. Press ok and follow the guide. This will allow you to select run or build to create the executable file for your current computer/device. Once the program is compiled use the deployment tool for your chosen system.
+Make sure to install cmake using this tool. From here you can either set up qt creator to build for your architecture (recommended) as well as for other devices like Android. Due to US Export laws this program cannot be sent in compiled form. In order to get the library needed you will need to compile it. There are directions at https://github.com/devbean/QtCipherSqlitePlugin , and can be downloaded from them or from my forked repository at https://github.com/socphoenix/QtCipherSqlitePlugin . Once compiled it will need to go into your Qt installation folder. For instance for macOS go to your Qt installation folder/6.3.2/macos/plugins/sqldrivers. Once this step is done from Qt Creator select Open Project and navigate to the folder containing the source code of this project. Select CMakeLists.txt, and click Open. QT Creator will ask to adjust CMake to match your current configurations. Press ok and follow the guide. This will allow you to select run or build to create the executable file for your current computer/device. Once the program is compiled use the deployment tool for your chosen system.
 Windows: https://doc.qt.io/Qt-5/windows-deployment.html
 MacOS: https://doc.qt.io/qt-6.2/macos-deployment.html
 Android: https://doc.qt.io/qt-6/deployment-android.html
 
 Compiling by command-line:
 Example uses Windows.
-using CMake use the following command on windows to compile using the QT open-source tools (example is for QT 6.3.1):
-"cmake -DCMAKE_PREFIX_PATH=C:\Qt\6.3.1\msvc2019_64 -S <source-dir> -B <build-dir>"
+using CMake use the following command on windows to compile using the QT open-source tools (example is for QT 6.3.2):
+"cmake -DCMAKE_PREFIX_PATH=C:\Qt\6.3.2\msvc2019_64 -S <source-dir> -B <build-dir>"
 
 
 To install on Android:
 In order to install these you will need to allow unknown apps, see [here for more info.](https://android.gadgethacks.com/how-to/android-101-sideload-apps-by-enabling-unknown-sources-install-unknown-apps-0161947/)
 
 Library license info:
-Qt Libraries used are Core, GUI, SQL, and are licensed under the GNU Lesser Public License v3 https://www.gnu.org/licenses/lgpl-3.0.html .  The Qt source code for these libraries can be downloaded from https://download.qt.io/official_releases/qt/6.3/6.3.1/single/ . Alternatively you can contact me here on github or at tuc03516@gmail.com for a copy of the source code.
+Qt Libraries used are Core, GUI, SQL, and are licensed under the GNU Lesser Public License v3 https://www.gnu.org/licenses/lgpl-3.0.html .  The Qt source code for these libraries can be downloaded from https://download.qt.io/official_releases/qt/6.3/6.3.2/single/ . Alternatively you can contact me here on github or at tuc03516@gmail.com for a copy of the source code.
 SQlite is licensed under the public domain.
 
