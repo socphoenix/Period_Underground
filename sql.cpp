@@ -17,6 +17,7 @@ int spotting, flow, mood, sex, cramps, tender, headache, noAverage;
 QString DateFormats = "MM/dd/yy";
 QDate cur_Date;
 QString password = "";
+QString dbName2 = "";
 bool passwordProtected = false;
 bool startup = true;
 bool symptoms[5];
@@ -41,6 +42,7 @@ void sql::Startup() {
     }
     db.setDatabaseName(dbLocation + "/" +dbName);
     db.database(dbLocation + "/" +dbName);
+    dbName2 = dbLocation + "/" +dbName;
     db.databaseName();
     db.setPassword(password);
 
@@ -98,7 +100,7 @@ void sql::Startup() {
         }
 
         QSqlQuery query(db);
-        query.prepare("SELECT * FROM Settings WHERE ID = 1");
+        query.prepare("SELECT * FROM Settings WHERE ID = 2");
         query.exec();
         query.next();
         //check if password is needed
@@ -117,8 +119,9 @@ void sql::Startup() {
         query.prepare("CREATE TABLE IF NOT EXISTS Settings (ID int not null primary key, DateFormat text, noPassword int)");
         query.exec();
         query.prepare("INSERT INTO Settings (ID, noPassword) VALUES (:ID, :noPassword)");
-        query.bindValue(":ID", 1);
-        query.bindValue(":noPassword", 1);
+        int i = 2;
+        query.bindValue(":ID", i);
+        query.bindValue(":noPassword", i);
         query.exec();
 
         //error checking
@@ -210,7 +213,73 @@ void sql::deleteALL(){
     //vacuum database to ensure no data is left behind
     query.prepare("VACUUM");
     query.exec();
+    query.prepare("INSERT INTO Settings (ID, noPassword) VALUES (:ID, :noPassword)");
+    int z = 2;
+    query.bindValue(":ID", z);
+    query.bindValue(":noPassword", z);
+    query.exec();
     db.close();
+}
+//fill with demo data
+void sql::demoMode(){
+    if(db.isOpen() == false) {
+        db.open();
+    }
+    QSqlQuery query(db);
+    //delete all rows
+    query.prepare("DELETE FROM Period_Info");
+    query.exec();
+    query.prepare("DELETE FROM Last_Period");
+    query.exec();
+    query.prepare("DELETE FROM Settings");
+    query.exec();
+    //vacuum database to ensure no data is left behind
+    query.prepare("VACUUM");
+    query.exec();
+
+//re initialize database
+    query.prepare("INSERT INTO Settings (ID, noPassword) VALUES (:ID, :noPassword)");
+    int z = 2;
+    query.bindValue(":ID", z);
+    query.bindValue(":noPassword", z);
+    query.exec();
+    //begin demo data.
+    srand(time(0));
+    int randDate = 10 + rand() % 6;
+    qDebug() << randDate;
+    randDate *= -1;
+    cur_Date = cur_Date.currentDate();
+    QDate setDate = cur_Date.addDays(randDate);
+    QDate dailyDate = setDate;
+    int i = 0;
+    while(i < 6) {
+        int j = 0;
+        dailyDate = setDate;
+        sql::newPeriodDate(dailyDate);
+        db.open();
+        while(j < 7) {
+            QString curDate = dailyDate.toString();
+            query.prepare("INSERT INTO Period_Info (QDate, flow, mood, sex, spotting, cramps, tender, headache) VALUES (:QDate, :flow, :mood, :sex, :spotting, :cramps, :tender, :headache)");
+            query.bindValue(0, curDate);
+            query.bindValue(1, rand() % 4);
+            query.bindValue(2, rand() % 4);
+            query.bindValue(3, rand() % 4);
+            query.bindValue(4, 0);
+            query.bindValue(5, rand() % 1);
+            query.bindValue(6, rand() % 1);
+            query.bindValue(7, rand() % 1);
+            query.exec();
+            j++;
+            dailyDate = dailyDate.addDays(-1);
+        }
+        i++;
+        randDate = 25 + (rand() % 6);
+        randDate *= -1;
+        setDate = setDate.addDays(randDate);
+
+    }
+    db.close();
+
 }
 //find and return last period start date
 QDate sql::lastPeriodCheck(){

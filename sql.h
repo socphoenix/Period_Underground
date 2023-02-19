@@ -28,6 +28,7 @@ public slots:
     void loadData(QString curDate);
     void changer();
     void deleteALL();
+    void demoMode();
     QDate lastPeriodCheck();
     void newPeriodDate(QDate date1);
     QDate whenIsPeriod(QDate date2);

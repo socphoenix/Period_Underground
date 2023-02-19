@@ -477,3 +477,28 @@ void MainWindow::on_comboBox_6_currentIndexChanged(int index)
     f.noAverages(index);
 }
 
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    QMessageBox confirm;
+    confirm.setText("Are you sure you wish to delete all data?");
+    confirm.setInformativeText("This cannot be undone");
+    confirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    confirm.setDefaultButton(QMessageBox::Cancel);
+    int ret = confirm.exec();
+    switch (ret) {
+    case QMessageBox::Cancel:
+        break;
+    case QMessageBox::Ok:
+        //kill all humans
+        f.demoMode();
+        QMessageBox::information(
+            this,
+            tr("Application Name"),
+            tr("All Data Successfully Deleted. The Program will now close.") );
+        QCoreApplication::quit();
+        break;
+    }
+
+}
+
