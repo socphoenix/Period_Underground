@@ -10,7 +10,7 @@
 #include <QString>
 #include <QObject>
 
-extern int spotting, flow, mood, sex, cramps, tender, headache, noAverage;
+extern int spotting, flow, mood, sex, cramps, tender, headache, noAverage, fuckerMcGee;
 extern QDate cur_Date;
 extern QString DateFormats, password;
 extern bool passwordProtected;
@@ -29,6 +29,8 @@ public slots:
     void changer();
     void deleteALL();
     void demoMode();
+    void reload();
+    void clearCalendar();
     QDate lastPeriodCheck();
     void newPeriodDate(QDate date1);
     QDate whenIsPeriod(QDate date2);

@@ -22,6 +22,7 @@ bool passwordProtected = false;
 bool startup = true;
 bool symptoms[5];
 int daysOut[5];
+int fuckerMcGee = 0;
 
 QSqlDatabase db;
 //emits signal to update user interface on app startup
@@ -131,6 +132,35 @@ void sql::Startup() {
     startup = false;
     db.close();
 }
+
+//reload database after major changes in settings.
+void sql::reload() {
+    if(db.isOpen() == false) {
+        db.open();
+    }
+    QSqlQuery query(db);
+    //load data
+    query.prepare("SELECT * FROM Period_Info");
+    query.exec();
+    int i = 0;
+    startup = true;
+    while(query.next()) {
+        //cycle through all and paint as needed, reference main window?
+        QString curDate = query.value(0).toString();
+        cur_Date = cur_Date.fromString(curDate);
+        flow = query.value(1).toInt();
+        mood = query.value(2).toInt();
+        sex = query.value(3).toInt();
+        spotting = query.value(4).toInt();
+        cramps = query.value(5).toInt();
+        tender = query.value(6).toInt();
+        headache = query.value(7).toInt();
+        changer();
+        i++;
+    }
+    db.close();
+    startup = false;
+}
 //save user input
 void sql::saveData(QString date, int flow, int mood, int sex, int spotting, int crampsCheck, int tenderCheck, int headacheCheck) {
     //check if db is open
@@ -197,12 +227,48 @@ void sql::loadData(QString curDate) {
     else {db.close();}
 
 }
-//leave sql database file intact, but delete all user data from database
-void sql::deleteALL(){
+
+//FIX THIS STUPID THING
+void sql::clearCalendar() {
+    qDebug() << "BEGIN HERE";
     if(db.isOpen() == false) {
         db.open();
     }
     QSqlQuery query(db);
+    //load data
+    query.prepare("SELECT * FROM Period_Info");
+    query.exec();
+    int i = 0;
+    startup = true;
+    while(query.next()) {
+        qDebug() << query.value(0).toString();
+        //cycle through all and paint as needed
+        QString curDate = query.value(0).toString();
+        cur_Date = cur_Date.fromString(curDate);
+        flow = 0;
+        mood = 0;
+        sex = 0;
+        spotting = 0;
+        cramps = 0;
+        tender = 0;
+        headache = 0;
+        fuckerMcGee = 1;
+        changer();
+        i++;
+    }
+    db.close();
+    startup = false;
+    fuckerMcGee = 0;
+}
+//leave sql database file intact, but delete all user data from database
+void sql::deleteALL(){
+    clearCalendar();
+
+    if(db.isOpen() == false) {
+        db.open();
+    }
+    QSqlQuery query(db);
+
     //delete all rows
     query.prepare("DELETE FROM Period_Info");
     query.exec();
@@ -222,6 +288,7 @@ void sql::deleteALL(){
 }
 //fill with demo data
 void sql::demoMode(){
+    clearCalendar();
     if(db.isOpen() == false) {
         db.open();
     }

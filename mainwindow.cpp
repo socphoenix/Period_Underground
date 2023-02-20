@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
         f.Startup();
     }
     noAverage = noAverage - 1;
-    qDebug() << noAverage;
+
     ui->comboBox_6->setCurrentIndex(noAverage);
 
     QDate test = f.lastPeriodCheck();
@@ -82,30 +82,37 @@ void MainWindow::updateUI() {
     ui->checkBox->setChecked(cramps);
     ui->checkBox_2->setChecked(tender);
     ui->checkBox_3->setChecked(headache);
-    if(flow == 1){
+
+
+    if(flow == 1 && fuckerMcGee != 1){
         QTextCharFormat format;
         format.setBackground(QColor("salmon"));
         QDate sql_me = ui->calendarWidget->selectedDate();
         ui->calendarWidget->setDateTextFormat(sql_me, format);
     }
-    else if(flow == 2) {
+    else if(flow == 2 && fuckerMcGee != 1) {
         QTextCharFormat format;
         format.setBackground(QColor("red"));
         QDate sql_me = ui->calendarWidget->selectedDate();
         ui->calendarWidget->setDateTextFormat(sql_me, format);
     }
-    else if(flow == 3) {
+    else if(flow == 3 && fuckerMcGee != 1) {
         QTextCharFormat format;
         format.setBackground(QColor("maroon"));
         QDate sql_me = ui->calendarWidget->selectedDate();
         ui->calendarWidget->setDateTextFormat(sql_me, format);
     }
-    else if(spotting == 1) {
+    else if(spotting == 1 && fuckerMcGee != 1) {
         QTextCharFormat format;
         format.setBackground(QColor("grey"));
         QDate sql_me = ui->calendarWidget->selectedDate();
         ui->calendarWidget->setDateTextFormat(sql_me, format);
         }
+    else if(fuckerMcGee == 1) {
+        QDate sql_me = ui->calendarWidget->selectedDate();
+        ui->calendarWidget->setDateTextFormat(sql_me, currentDateColor);
+        qDebug() << sql_me << "THIS FUCKER WORKED";
+    }
     else{}//last else to just return null
 
 }
@@ -143,8 +150,8 @@ void MainWindow::on_pushButton_clicked()
         QMessageBox::information(
             this,
             tr("Application Name"),
-            tr("All Data Successfully Deleted. The Program will now close.") );
-        QCoreApplication::quit();
+            tr("All Data Successfully Deleted.") );
+        f.reload();
         break;
     }
 
@@ -492,11 +499,12 @@ void MainWindow::on_pushButton_5_clicked()
     case QMessageBox::Ok:
         //kill all humans
         f.demoMode();
+        f.reload();
         QMessageBox::information(
             this,
             tr("Application Name"),
-            tr("All Data Successfully Deleted. The Program will now close.") );
-        QCoreApplication::quit();
+            tr("All Data Successfully Deleted. Demo Data has been loaded.") );
+
         break;
     }
 
