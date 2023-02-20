@@ -84,34 +84,33 @@ void MainWindow::updateUI() {
     ui->checkBox_3->setChecked(headache);
 
 
-    if(flow == 1 && fuckerMcGee != 1){
+    if(flow == 1 && clearCache != 1){
         QTextCharFormat format;
         format.setBackground(QColor("salmon"));
         QDate sql_me = ui->calendarWidget->selectedDate();
         ui->calendarWidget->setDateTextFormat(sql_me, format);
     }
-    else if(flow == 2 && fuckerMcGee != 1) {
+    else if(flow == 2 && clearCache != 1) {
         QTextCharFormat format;
         format.setBackground(QColor("red"));
         QDate sql_me = ui->calendarWidget->selectedDate();
         ui->calendarWidget->setDateTextFormat(sql_me, format);
     }
-    else if(flow == 3 && fuckerMcGee != 1) {
+    else if(flow == 3 && clearCache != 1) {
         QTextCharFormat format;
         format.setBackground(QColor("maroon"));
         QDate sql_me = ui->calendarWidget->selectedDate();
         ui->calendarWidget->setDateTextFormat(sql_me, format);
     }
-    else if(spotting == 1 && fuckerMcGee != 1) {
+    else if(spotting == 1 && clearCache != 1) {
         QTextCharFormat format;
         format.setBackground(QColor("grey"));
         QDate sql_me = ui->calendarWidget->selectedDate();
         ui->calendarWidget->setDateTextFormat(sql_me, format);
         }
-    else if(fuckerMcGee == 1) {
+    else if(clearCache == 1) {
         QDate sql_me = ui->calendarWidget->selectedDate();
         ui->calendarWidget->setDateTextFormat(sql_me, currentDateColor);
-        qDebug() << sql_me << "THIS FUCKER WORKED";
     }
     else{}//last else to just return null
 

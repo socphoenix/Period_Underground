@@ -22,7 +22,7 @@ bool passwordProtected = false;
 bool startup = true;
 bool symptoms[5];
 int daysOut[5];
-int fuckerMcGee = 0;
+int clearCache = 0;
 
 QSqlDatabase db;
 //emits signal to update user interface on app startup
@@ -228,9 +228,8 @@ void sql::loadData(QString curDate) {
 
 }
 
-//ADD REMOVAL OF GREEN PERIOD ESTIMATES!
+//clear all coloring of calendar for major changes to database
 void sql::clearCalendar() {
-    qDebug() << "BEGIN HERE";
     if(db.isOpen() == false) {
         db.open();
     }
@@ -241,7 +240,6 @@ void sql::clearCalendar() {
     int i = 0;
     startup = true;
     while(query.next()) {
-        qDebug() << query.value(0).toString();
         //cycle through all and paint as needed
         QString curDate = query.value(0).toString();
         cur_Date = cur_Date.fromString(curDate);
@@ -252,13 +250,34 @@ void sql::clearCalendar() {
         cramps = 0;
         tender = 0;
         headache = 0;
-        fuckerMcGee = 1;
+        clearCache = 1;
         changer();
+    }
+   //find last period. check first and last to make sure this also clears demo mode as well as normal usage. remove green
+   //from calendar
+    query.prepare("SELECT QDate FROM Last_Period");
+    query.exec();
+    query.next();
+    QString transitory = query.value(0).toString();
+    cur_Date = cur_Date.fromString(transitory);
+    cur_Date = cur_Date.addDays(28);
+    while(i < 20) {
+        changer();
+        cur_Date = cur_Date.addDays(1);
+        i++;
+    }
+    i = 0;
+    query.last();
+    cur_Date = cur_Date.fromString(query.value(0).toString());
+    cur_Date = cur_Date.addDays(28);
+    while(i < 20) {
+        changer();
+        cur_Date = cur_Date.addDays(1);
         i++;
     }
     db.close();
     startup = false;
-    fuckerMcGee = 0;
+    clearCache = 0;
 }
 //leave sql database file intact, but delete all user data from database
 void sql::deleteALL(){
@@ -313,7 +332,6 @@ void sql::demoMode(){
     //begin demo data.
     srand(time(0));
     int randDate = 10 + rand() % 6;
-    qDebug() << randDate;
     randDate *= -1;
     cur_Date = cur_Date.currentDate();
     QDate setDate = cur_Date.addDays(randDate);

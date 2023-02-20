@@ -10,7 +10,7 @@
 #include <QString>
 #include <QObject>
 
-extern int spotting, flow, mood, sex, cramps, tender, headache, noAverage, fuckerMcGee;
+extern int spotting, flow, mood, sex, cramps, tender, headache, noAverage, clearCache;
 extern QDate cur_Date;
 extern QString DateFormats, password;
 extern bool passwordProtected;
