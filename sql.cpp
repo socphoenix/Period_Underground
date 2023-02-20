@@ -228,7 +228,7 @@ void sql::loadData(QString curDate) {
 
 }
 
-//FIX THIS STUPID THING
+//ADD REMOVAL OF GREEN PERIOD ESTIMATES!
 void sql::clearCalendar() {
     qDebug() << "BEGIN HERE";
     if(db.isOpen() == false) {
