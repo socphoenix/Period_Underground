@@ -22,6 +22,7 @@ bool passwordProtected = false;
 bool startup = true;
 bool symptoms[5];
 int daysOut[5];
+int clearCache = 0;
 
 QSqlDatabase db;
 //emits signal to update user interface on app startup
@@ -131,6 +132,35 @@ void sql::Startup() {
     startup = false;
     db.close();
 }
+
+//reload database after major changes in settings.
+void sql::reload() {
+    if(db.isOpen() == false) {
+        db.open();
+    }
+    QSqlQuery query(db);
+    //load data
+    query.prepare("SELECT * FROM Period_Info");
+    query.exec();
+    int i = 0;
+    startup = true;
+    while(query.next()) {
+        //cycle through all and paint as needed, reference main window?
+        QString curDate = query.value(0).toString();
+        cur_Date = cur_Date.fromString(curDate);
+        flow = query.value(1).toInt();
+        mood = query.value(2).toInt();
+        sex = query.value(3).toInt();
+        spotting = query.value(4).toInt();
+        cramps = query.value(5).toInt();
+        tender = query.value(6).toInt();
+        headache = query.value(7).toInt();
+        changer();
+        i++;
+    }
+    db.close();
+    startup = false;
+}
 //save user input
 void sql::saveData(QString date, int flow, int mood, int sex, int spotting, int crampsCheck, int tenderCheck, int headacheCheck) {
     //check if db is open
@@ -197,12 +227,67 @@ void sql::loadData(QString curDate) {
     else {db.close();}
 
 }
-//leave sql database file intact, but delete all user data from database
-void sql::deleteALL(){
+
+//clear all coloring of calendar for major changes to database
+void sql::clearCalendar() {
     if(db.isOpen() == false) {
         db.open();
     }
     QSqlQuery query(db);
+    //load data
+    query.prepare("SELECT * FROM Period_Info");
+    query.exec();
+    int i = 0;
+    startup = true;
+    while(query.next()) {
+        //cycle through all and paint as needed
+        QString curDate = query.value(0).toString();
+        cur_Date = cur_Date.fromString(curDate);
+        flow = 0;
+        mood = 0;
+        sex = 0;
+        spotting = 0;
+        cramps = 0;
+        tender = 0;
+        headache = 0;
+        clearCache = 1;
+        changer();
+    }
+   //find last period. check first and last to make sure this also clears demo mode as well as normal usage. remove green
+   //from calendar
+    query.prepare("SELECT QDate FROM Last_Period");
+    query.exec();
+    query.next();
+    QString transitory = query.value(0).toString();
+    cur_Date = cur_Date.fromString(transitory);
+    cur_Date = cur_Date.addDays(28);
+    while(i < 20) {
+        changer();
+        cur_Date = cur_Date.addDays(1);
+        i++;
+    }
+    i = 0;
+    query.last();
+    cur_Date = cur_Date.fromString(query.value(0).toString());
+    cur_Date = cur_Date.addDays(28);
+    while(i < 20) {
+        changer();
+        cur_Date = cur_Date.addDays(1);
+        i++;
+    }
+    db.close();
+    startup = false;
+    clearCache = 0;
+}
+//leave sql database file intact, but delete all user data from database
+void sql::deleteALL(){
+    clearCalendar();
+
+    if(db.isOpen() == false) {
+        db.open();
+    }
+    QSqlQuery query(db);
+
     //delete all rows
     query.prepare("DELETE FROM Period_Info");
     query.exec();
@@ -222,6 +307,7 @@ void sql::deleteALL(){
 }
 //fill with demo data
 void sql::demoMode(){
+    clearCalendar();
     if(db.isOpen() == false) {
         db.open();
     }
@@ -246,7 +332,6 @@ void sql::demoMode(){
     //begin demo data.
     srand(time(0));
     int randDate = 10 + rand() % 6;
-    qDebug() << randDate;
     randDate *= -1;
     cur_Date = cur_Date.currentDate();
     QDate setDate = cur_Date.addDays(randDate);
