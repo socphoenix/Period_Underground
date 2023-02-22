@@ -404,7 +404,6 @@ void MainWindow::on_pushButton_2_clicked()
     if(ui->lineEdit->text() == ui->lineEdit_2->text()) {
         QMessageBox confirm;
         confirm.setText("Are you sure you want to password protect this app?");
-        confirm.setInformativeText("This cannot be undone");
         confirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
         confirm.setDefaultButton(QMessageBox::Cancel);
         int ret = confirm.exec();
@@ -428,12 +427,28 @@ void MainWindow::on_pushButton_3_clicked()
 {
     QString newPassword = ui->lineEdit_5->text();
     if(password == ui->lineEdit_3->text() && newPassword == ui->lineEdit_4->text()) {
-        f.updatePassword(newPassword);
+        QMessageBox confirm;
+        confirm.setText("Are you sure you want to change your password?");
+        confirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+        confirm.setDefaultButton(QMessageBox::Cancel);
+        int ret = confirm.exec();
+        switch (ret) {
+        case QMessageBox::Cancel:
+            break;
+        case QMessageBox::Ok:
+            f.updatePassword(newPassword);
+            QMessageBox::information(
+                this,
+                tr("Application Name"),
+                tr("Password Updated.") );
+        }
+
+    }
+    else {
         QMessageBox::information(
             this,
             tr("Application Name"),
-            tr("Password Updated.") );
-
+            tr("Wrong Password, Please try Again.") );
     }
 }
 
@@ -441,17 +456,28 @@ void MainWindow::on_pushButton_3_clicked()
 void MainWindow::on_pushButton_4_clicked()
 {
     if(ui->lineEdit_6->text() == password && ui->lineEdit_7->text() == password) {
-        f.removePassword();
-        QMessageBox::information(
-            this,
-            tr("Application Name"),
-            tr("Password Removed.") );
+        QMessageBox confirm;
+        confirm.setText("Are you sure you want to remove your database password?");
+        confirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+        confirm.setDefaultButton(QMessageBox::Cancel);
+        int ret = confirm.exec();
+        switch (ret) {
+        case QMessageBox::Cancel:
+            break;
+        case QMessageBox::Ok:
+            f.removePassword();
+            QMessageBox::information(
+                this,
+                tr("Application Name"),
+                tr("Password Removed.") );
+            break;
+        }
     }
     else {
         QMessageBox::information(
             this,
             tr("Application Name"),
-            tr("Wrong Password Try Again.") );
+            tr("Wrong Password, Please Try Again.") );
     }
 }
 
@@ -487,7 +513,7 @@ void MainWindow::on_comboBox_6_currentIndexChanged(int index)
 void MainWindow::on_pushButton_5_clicked()
 {
     QMessageBox confirm;
-    confirm.setText("Are you sure you wish to delete all data?");
+    confirm.setText("Are you sure you want to enable Demo Mode? This will delete all data currently stored!");
     confirm.setInformativeText("This cannot be undone");
     confirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
     confirm.setDefaultButton(QMessageBox::Cancel);
