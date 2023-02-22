@@ -27,7 +27,7 @@
        <enum>QTabWidget::South</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="usesScrollButtons">
        <bool>true</bool>
@@ -375,28 +375,32 @@
         <string>Settings</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Create New Password:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button will remove all user &lt;/p&gt;&lt;p&gt;data&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="1">
+         <widget class="QLineEdit" name="lineEdit_3"/>
+        </item>
+        <item row="12" column="0">
+         <widget class="QLabel" name="label_16">
+          <property name="text">
+           <string>Old Password</string>
+          </property>
+         </widget>
+        </item>
         <item row="10" column="0">
          <widget class="Line" name="line_8">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1">
-         <widget class="QLineEdit" name="lineEdit_2"/>
-        </item>
-        <item row="19" column="1">
-         <widget class="QLineEdit" name="lineEdit_7"/>
-        </item>
-        <item row="18" column="0">
-         <widget class="QLabel" name="label_20">
-          <property name="text">
-           <string>Current Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="Line" name="line_7">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -409,66 +413,22 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="0">
-         <widget class="Line" name="line_6">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
+        <item row="4" column="1">
+         <widget class="QComboBox" name="comboBox_5">
+          <item>
+           <property name="text">
+            <string>MM/DD/YY</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>DD/MM/YYYY</string>
+           </property>
+          </item>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="Line" name="line_14">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="19" column="0">
-         <widget class="QLabel" name="label_21">
-          <property name="text">
-           <string>Retype Current Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="17" column="0">
-         <widget class="QLabel" name="label_19">
-          <property name="text">
-           <string>Remove Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="20" column="0">
-         <widget class="QPushButton" name="pushButton_4">
-          <property name="text">
-           <string>Remove Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="label_14">
-          <property name="text">
-           <string>Create New Password:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="13" column="0">
-         <widget class="QLabel" name="label_17">
-          <property name="text">
-           <string>New Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="12" column="1">
-         <widget class="QLineEdit" name="lineEdit_3"/>
-        </item>
-        <item row="7" column="1">
-         <widget class="QLineEdit" name="lineEdit"/>
-        </item>
-        <item row="14" column="1">
-         <widget class="QLineEdit" name="lineEdit_5"/>
-        </item>
-        <item row="16" column="0">
-         <widget class="Line" name="line_10">
+        <item row="6" column="1">
+         <widget class="Line" name="line_7">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -478,13 +438,6 @@
          <widget class="Line" name="line_15">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This button will remove all user &lt;/p&gt;&lt;p&gt;data&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -502,19 +455,39 @@
           </item>
          </widget>
         </item>
-        <item row="4" column="1">
-         <widget class="QComboBox" name="comboBox_5">
-          <item>
-           <property name="text">
-            <string>MM/DD/YY</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>DD/MM/YYYY</string>
-           </property>
-          </item>
+        <item row="18" column="0">
+         <widget class="QLabel" name="label_20">
+          <property name="text">
+           <string>Current Password</string>
+          </property>
          </widget>
+        </item>
+        <item row="20" column="0">
+         <widget class="QPushButton" name="pushButton_4">
+          <property name="text">
+           <string>Remove Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="Line" name="line_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QLineEdit" name="lineEdit"/>
+        </item>
+        <item row="13" column="0">
+         <widget class="QLabel" name="label_17">
+          <property name="text">
+           <string>New Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="14" column="1">
+         <widget class="QLineEdit" name="lineEdit_5"/>
         </item>
         <item row="9" column="0">
          <widget class="QPushButton" name="pushButton_2">
@@ -523,24 +496,31 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="pushButton">
-          <property name="text">
-           <string>Delete Data</string>
+        <item row="16" column="1">
+         <widget class="Line" name="line_11">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item row="8" column="0">
-         <widget class="QLabel" name="label_22">
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_29">
           <property name="text">
-           <string>Retype New Password:</string>
+           <string>Delete all and add demo data</string>
           </property>
          </widget>
         </item>
-        <item row="11" column="0">
-         <widget class="QLabel" name="label_15">
+        <item row="17" column="0">
+         <widget class="QLabel" name="label_19">
           <property name="text">
-           <string>Update Password:</string>
+           <string>Remove Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="1">
+         <widget class="Line" name="line_9">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -557,10 +537,17 @@
           </property>
          </widget>
         </item>
-        <item row="15" column="0">
-         <widget class="QPushButton" name="pushButton_3">
+        <item row="2" column="0">
+         <widget class="Line" name="line_14">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0">
+         <widget class="QLabel" name="label_22">
           <property name="text">
-           <string>Save New Password</string>
+           <string>Retype New Password:</string>
           </property>
          </widget>
         </item>
@@ -571,30 +558,27 @@
           </property>
          </widget>
         </item>
-        <item row="16" column="1">
-         <widget class="Line" name="line_11">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="18" column="1">
-         <widget class="QLineEdit" name="lineEdit_6"/>
-        </item>
         <item row="13" column="1">
          <widget class="QLineEdit" name="lineEdit_4"/>
         </item>
-        <item row="10" column="1">
-         <widget class="Line" name="line_9">
+        <item row="16" column="0">
+         <widget class="Line" name="line_10">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item row="12" column="0">
-         <widget class="QLabel" name="label_16">
+        <item row="19" column="0">
+         <widget class="QLabel" name="label_21">
           <property name="text">
-           <string>Old Password</string>
+           <string>Retype Current Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="15" column="0">
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="text">
+           <string>Save New Password</string>
           </property>
          </widget>
         </item>
@@ -605,10 +589,26 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_29">
+        <item row="19" column="1">
+         <widget class="QLineEdit" name="lineEdit_7"/>
+        </item>
+        <item row="8" column="1">
+         <widget class="QLineEdit" name="lineEdit_2"/>
+        </item>
+        <item row="18" column="1">
+         <widget class="QLineEdit" name="lineEdit_6"/>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushButton">
           <property name="text">
-           <string>Delete all and add demo data</string>
+           <string>Delete Data</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="0">
+         <widget class="QLabel" name="label_15">
+          <property name="text">
+           <string>Update Password:</string>
           </property>
          </widget>
         </item>
@@ -632,10 +632,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt;&quot;&gt;This App is made with privacy in mind. All user inputs are stored locally on the phone, and does not send user data off the device. It features a quick deletion method in the settings to remove data on the device, as well as the option to encrypt the database the data is stored on.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt;&quot;&gt;&lt;br /&gt;This app is not meant to track fertility and should not be used to determine when one's fertile days are. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'.AppleSystemUIFont'; font-size:13pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt;&quot;&gt;Usage:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:700;&quot;&gt;Usage:&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt;&quot;&gt;This app uses color coding on the calendar to track past periods and spotting, as well as your next expected period. Grey is used for spotting, red uses different shades to show intensity of flow, and green is the next expected period.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt;&quot;&gt;This app now has estimated symptom dates for symptoms that predate actual menstrual flow. This is done with a simple average of past events, and is a best guess only. This app is unfortunately not omniscient.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt;&quot;&gt;Encryption:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt;&quot;&gt;This app now has estimated symptom dates for symptoms that predate actual menstrual flow. This is done with a simple average of past events, and is a best guess only. This app is unfortunately not omniscient. You can disable the smart estimator in the settings.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:700;&quot;&gt;Demo Mode:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt;&quot;&gt;There is a new feature as of 1.0.7, demo mode which will enable you to clear any current data and see what six months of random data would look like.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:700;&quot;&gt;Transferring to a new phone:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt;&quot;&gt;there is currently no simple way to do this, but using it can be done. On Android, open the file manager (if not installed by default there are several on the app store), then navigate to the Android folder, then data, then the folder ending in Period_Underground. Navigate to Files, then Documents. In that folder is the database named period_underground.sqlite. Copy this file to the new phone into the same directory.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:700;&quot;&gt;Encryption:&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt;&quot;&gt;In the Settings window there are 3 options. Create New Password, Update Password, and Remove Password. If no password is set use create password to add on. If one is set you can use Update password to change it, or Remove Password if you want to remove the password from the database.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
