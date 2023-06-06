@@ -22,6 +22,8 @@ set(PROJECT_SOURCES
         mainwindow.ui
         sql.h
         sql.cpp
+        pwchecker.h
+        pwchecker.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
