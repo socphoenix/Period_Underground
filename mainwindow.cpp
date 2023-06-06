@@ -12,6 +12,7 @@
 #include <QMessageBox>
 #include <QColor>
 #include <QInputDialog>
+#include "pwchecker.h"
 
 sql f;
 QColor testing;
@@ -402,23 +403,35 @@ void MainWindow::on_comboBox_5_currentIndexChanged(int index)
 void MainWindow::on_pushButton_2_clicked()
 {
     if(ui->lineEdit->text() == ui->lineEdit_2->text()) {
-        QMessageBox confirm;
-        confirm.setText("Are you sure you want to password protect this app?");
-        confirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-        confirm.setDefaultButton(QMessageBox::Cancel);
-        int ret = confirm.exec();
-        switch (ret) {
-        case QMessageBox::Cancel:
-            break;
-        case QMessageBox::Ok:
-            QString newPassword = ui->lineEdit->text();
-            f.createPassword(newPassword);
-            QMessageBox::information(
-                this,
-                tr("Application Name"),
-                tr("New Password saved.") );
-            break;
+        std::string pw = ui->lineEdit->text().toStdString();
+        pwcheck h;
+        int good_password = h.checker(pw);
+        if(good_password == 0) {
+            QMessageBox confirm;
+            confirm.setText("Are you sure you want to password protect this app?");
+            confirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+            confirm.setDefaultButton(QMessageBox::Cancel);
+            int ret = confirm.exec();
+            switch (ret) {
+            case QMessageBox::Cancel:
+                break;
+            case QMessageBox::Ok:
+                QString newPassword = ui->lineEdit->text();
+                f.createPassword(newPassword);
+                QMessageBox::information(
+                    this,
+                    tr("Application Name"),
+                    tr("New Password saved.") );
+                break;
+            }
         }
+        else {
+            QMessageBox failure;
+            failure.setText("Password is missing requirements");
+            failure.setStandardButtons(QMessageBox::Ok);
+            failure.exec();
+        }
+
     }
 }
 
@@ -427,20 +440,31 @@ void MainWindow::on_pushButton_3_clicked()
 {
     QString newPassword = ui->lineEdit_5->text();
     if(password == ui->lineEdit_3->text() && newPassword == ui->lineEdit_4->text()) {
-        QMessageBox confirm;
-        confirm.setText("Are you sure you want to change your password?");
-        confirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-        confirm.setDefaultButton(QMessageBox::Cancel);
-        int ret = confirm.exec();
-        switch (ret) {
-        case QMessageBox::Cancel:
-            break;
-        case QMessageBox::Ok:
-            f.updatePassword(newPassword);
-            QMessageBox::information(
-                this,
-                tr("Application Name"),
-                tr("Password Updated.") );
+        std::string pw = newPassword.toStdString();
+        pwcheck h;
+        int good_password = h.checker(pw);
+        if(good_password == 0) {
+            QMessageBox confirm;
+            confirm.setText("Are you sure you want to change your password?");
+            confirm.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+            confirm.setDefaultButton(QMessageBox::Cancel);
+            int ret = confirm.exec();
+            switch (ret) {
+            case QMessageBox::Cancel:
+                break;
+            case QMessageBox::Ok:
+                f.updatePassword(newPassword);
+                QMessageBox::information(
+                    this,
+                    tr("Application Name"),
+                    tr("Password Updated.") );
+            }
+        }
+        else {
+            QMessageBox failure;
+            failure.setText("Password is missing requirements");
+            failure.setStandardButtons(QMessageBox::Ok);
+            failure.exec();
         }
 
     }
